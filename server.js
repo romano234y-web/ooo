@@ -17,6 +17,11 @@ function writeDB(db) {
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Route propre pour le back office
+app.get('/backoffice', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'backoffice.html'));
+});
+
 function genNumero() {
   const now = new Date();
   const pad = n => String(n).padStart(2, '0');

@@ -1,127 +1,155 @@
-// cart: { 'itemId|size': { name, qty, price } }
+// ── CART STATE ────────────────────────────────
 let cart = {};
+let activeTab = 'pizzas_tomate';
 
 function fmt(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
 
-// ─── RENDER MENU ────────────────────────────────────────────────
-function renderMenu() {
+// ── HEADER SCROLL EFFECT ──────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ── MOBILE NAV ────────────────────────────────
+document.getElementById('burger-toggle').addEventListener('click', () => {
+  document.getElementById('mobile-nav').classList.toggle('open');
+});
+function closeMobileNav() {
+  document.getElementById('mobile-nav').classList.remove('open');
+}
+
+// ── CATEGORY TABS ─────────────────────────────
+function initTabs() {
+  document.querySelectorAll('.cat-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTab = btn.dataset.cat;
+      renderCategory(activeTab);
+    });
+  });
+}
+
+// ── RENDER CATEGORY ───────────────────────────
+function renderCategory(catKey) {
+  const cat = MENU[catKey];
   const container = document.getElementById('menu-container');
-  let html = '';
+  let html = '<div class="menu-category">';
+  if (cat.note) html += `<div class="cat-note">${cat.note}</div>`;
+  html += '<div class="menu-grid">';
 
-  for (const [catKey, cat] of Object.entries(MENU)) {
-    html += `<div class="menu-category">
-      <div class="menu-category-header">
-        <h3>${cat.label}</h3>
-        ${cat.note ? `<span class="menu-note">${cat.note}</span>` : ''}
-      </div>
-      <div class="menu-grid">`;
-
-    for (const item of cat.items) {
-      if (cat.sizes) {
-        // Pizza avec 3 tailles
-        html += `<div class="menu-card" id="card-${item.id}">
-          <div class="menu-name">${item.name}</div>
-          <div class="menu-desc">${item.desc}</div>
-          <div class="pizza-sizes">
-            ${PIZZA_SIZES.map(s => `
-              <button class="size-btn" id="sizebtn-${item.id}-${s.key}" onclick="togglePizza('${item.id}','${s.key}','${item.name}',${s.price})">
-                ${s.label}<strong>${fmt(s.price)}</strong>
-                <div class="qty-indicator" id="sqty-${item.id}-${s.key}"></div>
-              </button>
-            `).join('')}
+  for (const item of cat.items) {
+    if (cat.sizes) {
+      html += `<div class="menu-card" id="card-${item.id}">
+        <div class="menu-name">${item.name}</div>
+        <div class="menu-desc">${item.desc}</div>
+        <div class="pizza-sizes">
+          ${PIZZA_SIZES.map(s => `
+            <button class="size-btn${cart[item.id+'|'+s.key]?.qty ? ' active' : ''}"
+              id="sb-${item.id}-${s.key}"
+              onclick="addPizza('${item.id}','${s.key}','${item.name.replace(/'/g,"\\'")}',${s.price})">
+              ${s.label}<strong>${fmt(s.price)}</strong>
+              <div class="qty-ind" id="qi-${item.id}-${s.key}">${cart[item.id+'|'+s.key]?.qty > 0 ? '× '+cart[item.id+'|'+s.key].qty : ''}</div>
+            </button>`).join('')}
+        </div>
+      </div>`;
+    } else {
+      const qty = cart[item.id]?.qty || 0;
+      html += `<div class="menu-card${qty > 0 ? ' in-cart' : ''}" id="card-${item.id}">
+        <div class="menu-name">${item.name}</div>
+        <div class="menu-desc">${item.desc}</div>
+        <div class="menu-bottom">
+          <div class="menu-price">${fmt(item.price)}</div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty('${item.id}',-1,'${item.name.replace(/'/g,"\\'")}',${item.price})">−</button>
+            <span class="qty-val" id="qty-${item.id}">${qty}</span>
+            <button class="qty-btn" onclick="changeQty('${item.id}',1,'${item.name.replace(/'/g,"\\'")}',${item.price})">+</button>
           </div>
-        </div>`;
-      } else {
-        // Article standard
-        html += `<div class="menu-card" id="card-${item.id}">
-          <div class="menu-name">${item.name}</div>
-          <div class="menu-desc">${item.desc}</div>
-          <div class="menu-bottom">
-            <div class="menu-price">${fmt(item.price)}</div>
-            <div class="menu-actions">
-              <button class="qty-btn" onclick="changeQty('${item.id}',-1,'${item.name.replace(/'/g,"\\'")}',${item.price})">−</button>
-              <span class="qty-display" id="qty-${item.id}">0</span>
-              <button class="qty-btn" onclick="changeQty('${item.id}',1,'${item.name.replace(/'/g,"\\'")}',${item.price})">+</button>
-            </div>
-          </div>
-        </div>`;
-      }
+        </div>
+      </div>`;
     }
-
-    html += `</div></div>`;
   }
 
+  html += '</div></div>';
   container.innerHTML = html;
 }
 
-// ─── PIZZA SIZE TOGGLE ───────────────────────────────────────────
-function togglePizza(id, sizeKey, name, price) {
-  const cartKey = `${id}|${sizeKey}`;
+// ── PIZZA ADD ─────────────────────────────────
+function addPizza(id, sizeKey, name, price) {
+  const key = `${id}|${sizeKey}`;
   const size = PIZZA_SIZES.find(s => s.key === sizeKey);
-  if (cart[cartKey]) {
-    cart[cartKey].qty++;
-  } else {
-    cart[cartKey] = { name: `${name} (${size.label})`, qty: 1, price };
-  }
-  updatePizzaBtn(id, sizeKey);
-  renderCart();
-}
+  if (cart[key]) cart[key].qty++;
+  else cart[key] = { name: `${name} (${size.label})`, qty: 1, price };
 
-function updatePizzaBtn(id, sizeKey) {
-  const cartKey = `${id}|${sizeKey}`;
-  const btn = document.getElementById(`sizebtn-${id}-${sizeKey}`);
-  const qtyEl = document.getElementById(`sqty-${id}-${sizeKey}`);
-  if (!btn) return;
-  const qty = cart[cartKey]?.qty || 0;
-  btn.classList.toggle('active', qty > 0);
-  qtyEl.textContent = qty > 0 ? `× ${qty}` : '';
+  // Update button
+  const btn = document.getElementById(`sb-${id}-${sizeKey}`);
+  const qi = document.getElementById(`qi-${id}-${sizeKey}`);
+  if (btn) btn.classList.add('active');
+  if (qi) qi.textContent = '× ' + cart[key].qty;
 
-  // Surligner la carte si au moins une taille sélectionnée
+  // Highlight card
   const card = document.getElementById(`card-${id}`);
-  const hasAny = PIZZA_SIZES.some(s => cart[`${id}|${s.key}`]?.qty > 0);
-  card.classList.toggle('in-cart', hasAny);
+  if (card) card.classList.add('in-cart');
+
+  renderCart();
+  flashCart();
 }
 
-// ─── STANDARD QTY ───────────────────────────────────────────────
+// ── STANDARD QTY ──────────────────────────────
 function changeQty(id, delta, name, price) {
-  const cartKey = id;
-  if (!cart[cartKey] && delta > 0) cart[cartKey] = { name, qty: 0, price };
-  if (!cart[cartKey]) return;
-  cart[cartKey].qty += delta;
-  if (cart[cartKey].qty <= 0) delete cart[cartKey];
+  if (!cart[id] && delta > 0) cart[id] = { name, qty: 0, price };
+  if (!cart[id]) return;
+  cart[id].qty += delta;
+  if (cart[id].qty <= 0) delete cart[id];
 
-  const qtyEl = document.getElementById(`qty-${id}`);
-  if (qtyEl) qtyEl.textContent = cart[cartKey]?.qty || 0;
+  const el = document.getElementById(`qty-${id}`);
+  if (el) el.textContent = cart[id]?.qty || 0;
   const card = document.getElementById(`card-${id}`);
-  if (card) card.classList.toggle('in-cart', !!cart[cartKey]);
+  if (card) card.classList.toggle('in-cart', !!cart[id]);
   renderCart();
+  if (delta > 0) flashCart();
 }
 
-// ─── RENDER CART ─────────────────────────────────────────────────
+// ── RENDER CART ───────────────────────────────
 function renderCart() {
-  const el = document.getElementById('cart-items');
-  const totalBlock = document.getElementById('cart-total-block');
   const entries = Object.entries(cart).filter(([, v]) => v.qty > 0);
   const count = entries.reduce((a, [, v]) => a + v.qty, 0);
+
   document.getElementById('cart-count').textContent = count;
 
+  const cartItems = document.getElementById('cart-items');
+  const cartTotalBlock = document.getElementById('cart-total-block');
+
   if (entries.length === 0) {
-    el.innerHTML = '<p class="empty-cart">Votre panier est vide.<br>Sélectionnez des articles ci-dessus.</p>';
-    totalBlock.style.display = 'none';
+    cartItems.innerHTML = `<div class="cart-empty">
+      <div class="cart-empty-icon">🍕</div>
+      <p>Votre panier est vide</p>
+      <a href="#menu" class="cart-empty-link">Voir la carte →</a>
+    </div>`;
+    cartTotalBlock.style.display = 'none';
     return;
   }
 
   let total = 0;
-  el.innerHTML = entries.map(([, v]) => {
+  cartItems.innerHTML = entries.map(([, v]) => {
     const sub = v.price * v.qty;
     total += sub;
-    return `<div class="cart-line"><span>${v.name} × ${v.qty}</span><span>${fmt(sub)}</span></div>`;
+    return `<div class="cart-line">
+      <span class="cart-line-name">${v.name} × ${v.qty}</span>
+      <span class="cart-line-price">${fmt(sub)}</span>
+    </div>`;
   }).join('');
+
   document.getElementById('cart-total').textContent = fmt(total);
-  totalBlock.style.display = 'block';
+  cartTotalBlock.style.display = 'block';
 }
 
-// ─── CRENEAUX ───────────────────────────────────────────────────
+function flashCart() {
+  const badge = document.getElementById('cart-count');
+  badge.style.transform = 'scale(1.4)';
+  setTimeout(() => badge.style.transform = '', 200);
+}
+
+// ── CRENEAUX ──────────────────────────────────
 async function loadCreneaux() {
   const res = await fetch('/api/creneaux');
   const slots = await res.json();
@@ -133,27 +161,32 @@ async function loadCreneaux() {
   });
 }
 
-// ─── TYPE TOGGLE ────────────────────────────────────────────────
-document.querySelectorAll('input[name="type"]').forEach(radio => {
-  radio.addEventListener('change', () => {
-    const isLiv = radio.value === 'livraison';
-    document.getElementById('adresse-group').style.display = isLiv ? 'block' : 'none';
+// ── TYPE TOGGLE ───────────────────────────────
+document.querySelectorAll('input[name="type"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const isLiv = r.value === 'livraison';
+    const ag = document.getElementById('adresse-group');
+    ag.style.display = isLiv ? 'block' : 'none';
     document.getElementById('adresse').required = isLiv;
   });
 });
 
-// ─── SUBMIT ─────────────────────────────────────────────────────
+// ── SUBMIT ────────────────────────────────────
 document.getElementById('order-form').addEventListener('submit', async e => {
   e.preventDefault();
   const entries = Object.entries(cart).filter(([, v]) => v.qty > 0);
-  if (entries.length === 0) { alert('Votre panier est vide !'); return; }
-
+  if (!entries.length) {
+    alert('Votre panier est vide ! Ajoutez des articles depuis la carte.');
+    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
   const type = document.querySelector('input[name="type"]:checked').value;
-  const items = entries.map(([key, v]) => ({ id: key, name: v.name, qty: v.qty, price: v.price }));
+  const items = entries.map(([k, v]) => ({ id: k, name: v.name, qty: v.qty, price: v.price }));
   const total = items.reduce((s, i) => s + i.price * i.qty, 0);
 
   const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+  btn.querySelector('span').textContent = 'Envoi en cours...';
 
   try {
     const res = await fetch('/api/orders', {
@@ -169,13 +202,14 @@ document.getElementById('order-form').addEventListener('submit', async e => {
         notes: document.getElementById('notes').value.trim() || null,
       })
     });
-    if (!res.ok) { const e = await res.json(); throw new Error(e.error || 'Erreur'); }
+    if (!res.ok) { const er = await res.json(); throw new Error(er.error || 'Erreur'); }
     const order = await res.json();
     showConfirm(order);
   } catch (err) {
     alert('Erreur : ' + err.message);
   } finally {
-    btn.disabled = false; btn.textContent = 'Valider la commande';
+    btn.disabled = false;
+    btn.querySelector('span').textContent = 'Valider ma commande';
   }
 });
 
@@ -192,10 +226,12 @@ function closeConfirm() {
   document.getElementById('order-form').reset();
   document.getElementById('adresse-group').style.display = 'none';
   cart = {};
-  renderMenu();
+  renderCategory(activeTab);
   renderCart();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ─── INIT ────────────────────────────────────────────────────────
-renderMenu();
+// ── INIT ──────────────────────────────────────
+initTabs();
+renderCategory(activeTab);
 loadCreneaux();

@@ -6,139 +6,264 @@
   <title>R'pizz — Pizzeria Châteauneuf-en-Thymerais</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="client-page">
+<body>
 
-<!-- HEADER -->
-<header>
+<!-- ── HEADER ── -->
+<header id="header">
   <div class="header-inner">
-    <div class="logo">R'<span>pizz</span> 🍕</div>
-    <nav>
+    <a href="#" class="logo">R'<em>pizz</em></a>
+    <nav class="main-nav">
       <a href="#menu">La carte</a>
-      <a href="#commander" class="btn-nav">Commander</a>
+      <a href="#about">À propos</a>
+      <a href="#commander">Commander</a>
     </nav>
+    <a href="#commander" class="btn-cta">Commander <span>→</span></a>
+    <button class="burger-toggle" id="burger-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#menu" onclick="closeMobileNav()">La carte</a>
+    <a href="#about" onclick="closeMobileNav()">À propos</a>
+    <a href="#commander" onclick="closeMobileNav()">Commander</a>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-circle c1"></div>
+    <div class="hero-circle c2"></div>
+    <div class="hero-circle c3"></div>
+  </div>
   <div class="hero-content">
-    <h1>Pizzas artisanales à <em>Châteauneuf-en-Thymerais</em></h1>
-    <p>31 rue Jean Moulin, 28170 — 📞 02 80.67.78.96</p>
-
-    <div class="hero-promo">
-      <div class="promo-badge">🏠 Sur place & à emporter<br><strong>1 achetée = 1 offerte</strong></div>
-      <div class="promo-badge">🛵 En livraison<br><strong>1 achetée = la 2ème à -50%</strong></div>
-      <div class="promo-badge">🛵 En livraison<br><strong>2 achetées = la 3ème offerte</strong></div>
+    <div class="hero-badge">🍕 Fait maison · Livraison · À emporter</div>
+    <h1>La vraie pizza<br><em>artisanale</em></h1>
+    <p>Pâte maison, ingrédients frais, cuisson au four.<br>À Châteauneuf-en-Thymerais depuis toujours.</p>
+    <div class="hero-actions">
+      <a href="#commander" class="btn-primary">Commander maintenant</a>
+      <a href="#menu" class="btn-ghost">Voir la carte</a>
     </div>
-
-    <div class="hero-hours">
-      <strong>Lun :</strong> 11h30–14h00 / 18h00–22h30 &nbsp;|&nbsp;
-      <strong>Mer–Sam :</strong> 11h30–14h00 / 18h00–22h30 &nbsp;|&nbsp;
-      <strong>Dim :</strong> 18h00–22h30
+    <div class="hero-promos">
+      <div class="promo-item">
+        <span class="promo-icon">🏠</span>
+        <div><strong>Sur place & emporter</strong><br>1 achetée = 1 offerte</div>
+      </div>
+      <div class="promo-divider"></div>
+      <div class="promo-item">
+        <span class="promo-icon">🛵</span>
+        <div><strong>En livraison</strong><br>1 achetée = la 2ème à −50%</div>
+      </div>
+      <div class="promo-divider"></div>
+      <div class="promo-item">
+        <span class="promo-icon">🎁</span>
+        <div><strong>En livraison</strong><br>2 achetées = la 3ème offerte</div>
+      </div>
     </div>
-
-    <a href="#commander" class="btn-primary">Commander maintenant</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Découvrir</span>
+    <div class="scroll-arrow"></div>
   </div>
 </section>
 
-<!-- MENU -->
+<!-- ── HORAIRES BANNER ── -->
+<div class="hours-banner">
+  <div class="hours-inner">
+    <div class="hours-item"><span>📍</span> 31 rue Jean Moulin, 28170 Châteauneuf-en-Thymerais</div>
+    <div class="hours-sep">·</div>
+    <div class="hours-item"><span>📞</span> 02 80.67.78.96</div>
+    <div class="hours-sep">·</div>
+    <div class="hours-item"><span>🕐</span> Lun & Mer–Sam : 11h30–14h / 18h–22h30</div>
+    <div class="hours-sep">·</div>
+    <div class="hours-item"><span>🕐</span> Dim : 18h–22h30</div>
+  </div>
+</div>
+
+<!-- ── MENU ── -->
 <section id="menu" class="section">
   <div class="container">
-    <h2 class="section-title">Notre Carte</h2>
+    <div class="section-head">
+      <p class="section-label">Notre Carte</p>
+      <h2>Choisissez votre<br><em>pizza préférée</em></h2>
+      <div class="sizes-info">
+        <div class="size-tag">Junior <strong>8€</strong></div>
+        <div class="size-tag">Senior <strong>10€</strong></div>
+        <div class="size-tag mega-tag">Méga <strong>15€</strong></div>
+      </div>
+    </div>
 
-    <div class="sizes-legend">
-      <div class="size-pill">Junior <span>8€</span></div>
-      <div class="size-pill">Senior <span>10€</span></div>
-      <div class="size-pill">Méga <span>15€</span></div>
+    <!-- Onglets catégories -->
+    <div class="cat-tabs" id="cat-tabs">
+      <button class="cat-tab active" data-cat="pizzas_tomate">🍅 Base Tomate</button>
+      <button class="cat-tab" data-cat="pizzas_creme">🥛 Base Crème</button>
+      <button class="cat-tab" data-cat="burgers">🍔 Burgers</button>
+      <button class="cat-tab" data-cat="paninis">🥖 Paninis</button>
+      <button class="cat-tab" data-cat="petites_faims">🧀 Petites faims</button>
+      <button class="cat-tab" data-cat="desserts">🍮 Desserts</button>
+      <button class="cat-tab" data-cat="boissons">🥤 Boissons</button>
     </div>
 
     <div id="menu-container"></div>
   </div>
 </section>
 
-<!-- COMMANDE -->
-<section id="commander" class="section section-dark">
-  <div class="container">
-    <h2 class="section-title">Votre Commande</h2>
-    <p class="section-sub">Sélectionnez vos articles dans la carte ci-dessus</p>
-
-    <div class="order-layout">
-      <div class="cart-panel">
-        <h3>Panier <span id="cart-count" class="badge">0</span></h3>
-        <div id="cart-items" class="cart-items">
-          <p class="empty-cart">Votre panier est vide.<br>Sélectionnez des articles ci-dessus.</p>
-        </div>
-        <div class="cart-total" id="cart-total-block" style="display:none">
-          <div class="total-line">Total : <span id="cart-total">0,00 €</span></div>
-        </div>
+<!-- ── À PROPOS ── -->
+<section id="about" class="section section-alt">
+  <div class="container about-grid">
+    <div class="about-text">
+      <p class="section-label">Notre histoire</p>
+      <h2>La pizza comme<br><em>on l'aime</em></h2>
+      <p>Chez R'pizz, chaque pizza est préparée avec passion. Pâte pétrie maison, sauce tomate maison, ingrédients sélectionnés avec soin.</p>
+      <p>Nous proposons la livraison, la vente à emporter et la dégustation sur place pour vous offrir le meilleur de la pizza artisanale.</p>
+      <div class="about-stats">
+        <div class="stat"><strong>21+</strong><span>Pizzas au menu</span></div>
+        <div class="stat"><strong>3</strong><span>Tailles disponibles</span></div>
+        <div class="stat"><strong>0</strong><span>Compromis sur la qualité</span></div>
       </div>
-
-      <form class="order-form" id="order-form">
-        <h3>Vos informations</h3>
-        <div class="form-group">
-          <label>Nom & Prénom *</label>
-          <input type="text" id="client_name" placeholder="Jean Dupont" required>
-        </div>
-        <div class="form-group">
-          <label>Téléphone *</label>
-          <input type="tel" id="client_phone" placeholder="06 12 34 56 78" required>
-        </div>
-
-        <h3>Type de commande</h3>
-        <div class="type-selector">
-          <label class="type-option">
-            <input type="radio" name="type" value="emporter" checked>
-            <span class="type-card">🛍️<br>À emporter</span>
-          </label>
-          <label class="type-option">
-            <input type="radio" name="type" value="livraison">
-            <span class="type-card">🛵<br>Livraison</span>
-          </label>
-        </div>
-
-        <div class="form-group" id="adresse-group" style="display:none">
-          <label>Adresse de livraison *</label>
-          <input type="text" id="adresse" placeholder="12 rue de la Paix, Châteauneuf-en-Thymerais">
-        </div>
-
-        <h3>Créneau horaire</h3>
-        <div class="form-group">
-          <select id="creneau" required>
-            <option value="">Choisissez un créneau...</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Notes / Allergies</label>
-          <textarea id="notes" rows="2" placeholder="Sans gluten, bien cuit, sans anchois..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-primary btn-full" id="submit-btn">
-          Valider la commande
-        </button>
-      </form>
+    </div>
+    <div class="about-visual">
+      <div class="visual-card vc1">🍕</div>
+      <div class="visual-card vc2">🔥</div>
+      <div class="visual-card vc3">⭐</div>
     </div>
   </div>
 </section>
 
-<!-- CONFIRMATION -->
+<!-- ── COMMANDE ── -->
+<section id="commander" class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="section-label">Commande en ligne</p>
+      <h2>Prêt à commander ?</h2>
+    </div>
+
+    <div class="order-layout">
+      <!-- Panier flottant -->
+      <aside class="cart-aside">
+        <div class="cart-panel">
+          <div class="cart-header">
+            <h3>🛒 Votre panier</h3>
+            <span class="cart-badge" id="cart-count">0</span>
+          </div>
+          <div id="cart-items">
+            <div class="cart-empty">
+              <div class="cart-empty-icon">🍕</div>
+              <p>Votre panier est vide</p>
+              <a href="#menu" class="cart-empty-link">Voir la carte →</a>
+            </div>
+          </div>
+          <div id="cart-total-block" class="cart-footer" style="display:none">
+            <div class="cart-total-line">
+              <span>Total</span>
+              <strong id="cart-total">0,00 €</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Formulaire -->
+      <div class="order-form-wrap">
+        <form id="order-form" class="order-form">
+
+          <div class="form-section">
+            <h3><span class="step">1</span> Vos coordonnées</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nom & Prénom *</label>
+                <input type="text" id="client_name" placeholder="Jean Dupont" required>
+              </div>
+              <div class="form-group">
+                <label>Téléphone *</label>
+                <input type="tel" id="client_phone" placeholder="06 12 34 56 78" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3><span class="step">2</span> Mode de réception</h3>
+            <div class="type-selector">
+              <label class="type-card">
+                <input type="radio" name="type" value="emporter" checked>
+                <div class="type-card-inner">
+                  <span class="type-icon">🛍️</span>
+                  <strong>À emporter</strong>
+                  <small>Récupérez votre commande sur place</small>
+                </div>
+              </label>
+              <label class="type-card">
+                <input type="radio" name="type" value="livraison">
+                <div class="type-card-inner">
+                  <span class="type-icon">🛵</span>
+                  <strong>Livraison</strong>
+                  <small>Livré directement chez vous</small>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" id="adresse-group" style="display:none">
+              <label>Adresse de livraison *</label>
+              <input type="text" id="adresse" placeholder="12 rue de la Paix, Châteauneuf-en-Thymerais">
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3><span class="step">3</span> Créneau horaire</h3>
+            <div class="form-group">
+              <select id="creneau" required>
+                <option value="">Choisissez un créneau...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3><span class="step">4</span> Notes & Allergies</h3>
+            <div class="form-group">
+              <textarea id="notes" rows="3" placeholder="Sans gluten, bien cuit, sans anchois..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submit-btn">
+            <span>Valider ma commande</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONFIRMATION ── -->
 <div id="confirmation-overlay" class="overlay" style="display:none">
-  <div class="overlay-card">
-    <div class="confirm-icon">✅</div>
+  <div class="confirm-card">
+    <div class="confirm-anim">✅</div>
     <h2>Commande confirmée !</h2>
-    <p>Numéro : <strong id="confirm-numero"></strong></p>
-    <p id="confirm-type"></p>
-    <p>Créneau : <strong id="confirm-creneau"></strong></p>
-    <p class="confirm-sub">Nous vous contacterons si besoin. Merci et à bientôt !</p>
+    <div class="confirm-details">
+      <div class="confirm-row"><span>Numéro</span><strong id="confirm-numero"></strong></div>
+      <div class="confirm-row"><span>Mode</span><strong id="confirm-type"></strong></div>
+      <div class="confirm-row"><span>Créneau</span><strong id="confirm-creneau"></strong></div>
+    </div>
+    <p class="confirm-msg">Nous vous contacterons si besoin. À tout de suite !</p>
     <button class="btn-primary" onclick="closeConfirm()">Nouvelle commande</button>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer>
-  <p>🍕 <strong>R'pizz</strong> — 31 rue Jean Moulin, 28170 Châteauneuf-en-Thymerais — 📞 02 80.67.78.96</p>
+  <div class="footer-inner">
+    <div class="footer-logo">R'<em>pizz</em></div>
+    <div class="footer-info">
+      <p>📍 31 rue Jean Moulin, 28170 Châteauneuf-en-Thymerais</p>
+      <p>📞 02 80.67.78.96</p>
+    </div>
+    <div class="footer-hours">
+      <p><strong>Lun :</strong> 11h30–14h / 18h–22h30</p>
+      <p><strong>Mer–Sam :</strong> 11h30–14h / 18h–22h30</p>
+      <p><strong>Dim :</strong> 18h–22h30</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 R'pizz · Fait avec ❤️</div>
 </footer>
 
 <script src="menu.js"></script>

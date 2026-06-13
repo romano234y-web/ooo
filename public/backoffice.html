@@ -6,14 +6,14 @@
   <title>R'pizz — Back Office</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bo-page">
 
 <header class="bo-header">
   <div class="header-inner">
-    <div class="logo">🍕 R'pizz — Back Office</div>
-    <div class="bo-controls">
+    <div class="logo">R'<em>pizz</em> · Back Office</div>
+    <div class="bo-controls" id="orders-controls">
       <input type="date" id="filter-date" value="">
       <select id="filter-status">
         <option value="">Tous les statuts</option>
@@ -23,25 +23,65 @@
         <option value="livre">Livré / Remis</option>
         <option value="annule">Annulé</option>
       </select>
-      <button class="btn-refresh" onclick="loadOrders()">🔄 Actualiser</button>
+      <button class="btn-refresh" onclick="refresh()">🔄 Actualiser</button>
       <a href="/" class="btn-cta">Voir le site <span>→</span></a>
     </div>
   </div>
 </header>
 
 <main class="bo-main">
-  <div class="bo-stats" id="bo-stats"></div>
 
-  <div id="orders-container" class="orders-grid">
-    <p class="loading">Chargement...</p>
+  <!-- Onglets -->
+  <div class="bo-tabs">
+    <button class="bo-tab active" data-view="commandes">📋 Commandes</button>
+    <button class="bo-tab" data-view="clients">👥 Clients</button>
+    <button class="bo-tab" data-view="stats">📊 Statistiques</button>
   </div>
+
+  <!-- VUE COMMANDES -->
+  <div id="view-commandes" class="bo-view">
+    <div class="bo-stats" id="bo-stats"></div>
+    <div id="orders-container" class="orders-grid">
+      <p class="loading">Chargement...</p>
+    </div>
+  </div>
+
+  <!-- VUE CLIENTS -->
+  <div id="view-clients" class="bo-view" style="display:none">
+    <div class="bo-panel">
+      <h3>👥 Base de données clients</h3>
+      <div class="clients-table-wrap">
+        <table class="clients-table" id="clients-table">
+          <thead>
+            <tr>
+              <th>Client</th><th>Téléphone</th><th>Adresse(s)</th>
+              <th>Commandes</th><th>Total dépensé</th><th>Panier moyen</th><th>Dernière</th>
+            </tr>
+          </thead>
+          <tbody id="clients-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- VUE STATS -->
+  <div id="view-stats" class="bo-view" style="display:none">
+    <div class="kpi-grid" id="kpi-grid"></div>
+    <div class="bo-panel">
+      <h3>Répartition du chiffre d'affaires</h3>
+      <div class="split-bars" id="split-bars"></div>
+    </div>
+    <div class="bo-panel">
+      <h3>🏆 Top 5 des articles</h3>
+      <div class="top-list" id="top-list"></div>
+    </div>
+  </div>
+
 </main>
 
 <!-- PRINT MODAL -->
 <div id="print-modal" class="overlay" style="display:none">
-  <div class="overlay-card print-card" id="print-content">
-    <!-- filled by JS -->
-  </div>
+  <div class="confirm-card print-card" id="print-content"></div>
 </div>
 
 <script src="backoffice.js"></script>

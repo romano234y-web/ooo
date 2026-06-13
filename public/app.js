@@ -129,18 +129,54 @@ function renderCart() {
     return;
   }
 
-  let total = 0;
   cartItems.innerHTML = entries.map(([, v]) => {
     const sub = v.price * v.qty;
-    total += sub;
     return `<div class="cart-line">
       <span class="cart-line-name">${v.name} × ${v.qty}</span>
       <span class="cart-line-price">${fmt(sub)}</span>
     </div>`;
   }).join('');
 
-  document.getElementById('cart-total').textContent = fmt(total);
+  // Calcul des promotions selon le mode choisi
+  const type = document.querySelector('input[name="type"]:checked')?.value || 'emporter';
+  const items = entries.map(([k, v]) => ({ id: k, name: v.name, qty: v.qty, price: v.price }));
+  const promo = Promo.compute(items, type);
+
+  let footerHTML = '';
+  footerHTML += `<div class="cart-sub-line"><span>Sous-total</span><span>${fmt(promo.subtotal)}</span></div>`;
+
+  if (promo.discount > 0) {
+    footerHTML += promo.details.map(d => `<div class="cart-promo-line">${d}</div>`).join('');
+    footerHTML += `<div class="cart-sub-line discount"><span>Réduction</span><span>−${fmt(promo.discount)}</span></div>`;
+  }
+
+  footerHTML += `<div class="cart-total-line"><span>Total</span><strong>${fmt(promo.total)}</strong></div>`;
+
+  // Avertissement livraison minimum
+  if (type === 'livraison' && !Promo.livraisonAllowed(items)) {
+    const reste = Promo.MIN_LIVRAISON - promo.subtotal;
+    footerHTML += `<div class="cart-warning">🛵 Livraison dès ${Promo.MIN_LIVRAISON}€ — encore ${fmt(reste)}</div>`;
+  }
+
+  cartTotalBlock.innerHTML = footerHTML;
   cartTotalBlock.style.display = 'block';
+
+  updateLivraisonAvailability(items);
+}
+
+// Active/désactive la livraison selon le minimum
+function updateLivraisonAvailability(items) {
+  const livRadio = document.querySelector('input[name="type"][value="livraison"]');
+  if (!livRadio) return;
+  const allowed = Promo.livraisonAllowed(items);
+  const card = livRadio.closest('.type-card');
+  livRadio.disabled = !allowed;
+  if (card) card.classList.toggle('disabled', !allowed);
+  // Si livraison sélectionnée mais désormais interdite → repasser en emporter
+  if (!allowed && livRadio.checked) {
+    document.querySelector('input[name="type"][value="emporter"]').checked = true;
+    document.getElementById('adresse-group').style.display = 'none';
+  }
 }
 
 function flashCart() {
@@ -168,6 +204,7 @@ document.querySelectorAll('input[name="type"]').forEach(r => {
     const ag = document.getElementById('adresse-group');
     ag.style.display = isLiv ? 'block' : 'none';
     document.getElementById('adresse').required = isLiv;
+    renderCart();
   });
 });
 
@@ -182,7 +219,11 @@ document.getElementById('order-form').addEventListener('submit', async e => {
   }
   const type = document.querySelector('input[name="type"]:checked').value;
   const items = entries.map(([k, v]) => ({ id: k, name: v.name, qty: v.qty, price: v.price }));
-  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+
+  if (type === 'livraison' && !Promo.livraisonAllowed(items)) {
+    alert(`La livraison nécessite un minimum de ${Promo.MIN_LIVRAISON}€ de commande.`);
+    return;
+  }
 
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
@@ -198,7 +239,7 @@ document.getElementById('order-form').addEventListener('submit', async e => {
         type,
         adresse: document.getElementById('adresse').value.trim() || null,
         creneau: document.getElementById('creneau').value,
-        items, total,
+        items,
         notes: document.getElementById('notes').value.trim() || null,
       })
     });

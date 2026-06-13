@@ -1,0 +1,63 @@
+{
+  "orders": [
+    {
+      "id": 1,
+      "numero": "RP2232-252",
+      "client_name": "Marie Durand",
+      "client_phone": "0611111111",
+      "type": "emporter",
+      "adresse": null,
+      "creneau": "12:00",
+      "items": [
+        {
+          "id": "marg|senior",
+          "name": "Margherita (Senior)",
+          "qty": 2,
+          "price": 10
+        }
+      ],
+      "subtotal": 20,
+      "discount": 10,
+      "total": 10,
+      "promo_details": [
+        "🎁 Margherita (Senior) offerte (-10€)"
+      ],
+      "notes": null,
+      "status": "en_attente",
+      "created_at": "2026-06-13T22:32:23.229Z"
+    },
+    {
+      "id": 2,
+      "numero": "RP2232-557",
+      "client_name": "Marie Durand",
+      "client_phone": "0611111111",
+      "type": "livraison",
+      "adresse": "5 rue Test",
+      "creneau": "19:00",
+      "items": [
+        {
+          "id": "a|mega",
+          "name": "A (Mega)",
+          "qty": 1,
+          "price": 15
+        },
+        {
+          "id": "b|senior",
+          "name": "B (Senior)",
+          "qty": 1,
+          "price": 10
+        }
+      ],
+      "subtotal": 25,
+      "discount": 5,
+      "total": 20,
+      "promo_details": [
+        "➖ B (Senior) à -50% (-5€)"
+      ],
+      "notes": null,
+      "status": "en_attente",
+      "created_at": "2026-06-13T22:32:23.237Z"
+    }
+  ],
+  "nextId": 3
+}

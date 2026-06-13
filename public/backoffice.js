@@ -73,7 +73,10 @@ function renderOrders() {
         ${order.items.map(i => `<div class="order-item">${i.qty}× ${i.name} <span>${fmt(i.price * i.qty)}</span></div>`).join('')}
         ${order.notes ? `<div class="order-notes">📝 ${order.notes}</div>` : ''}
       </div>
-      <div class="order-total">Total : <strong>${fmt(order.total)}</strong></div>
+      <div class="order-total">
+        ${order.discount > 0 ? `<span style="font-size:.8rem;color:#2ecc71;display:block;margin-bottom:2px;">🎁 Promo −${fmt(order.discount)}</span>` : ''}
+        Total : <strong>${fmt(order.total)}</strong>
+      </div>
       <div class="order-status-label ${st.cls}">${st.label}</div>
       <div class="order-actions">
         ${nextStatus ? `<button class="btn-action btn-next" onclick="updateStatus(${order.id}, '${nextStatus}')">${nextLabel}</button>` : ''}
@@ -121,6 +124,12 @@ function printOrder(id) {
         `).join('')}
       </div>
       <hr>
+      ${order.discount > 0 ? `
+        <div class="ticket-line"><span>Sous-total</span><span>${(order.subtotal || 0).toFixed(2)} €</span></div>
+        ${(order.promo_details || []).map(d => `<div class="ticket-line" style="color:#c0392b">${d}</div>`).join('')}
+        <div class="ticket-line"><span>Réduction</span><span>-${order.discount.toFixed(2)} €</span></div>
+        <hr>
+      ` : ''}
       ${order.notes ? `<div class="ticket-notes">📝 ${order.notes}</div><hr>` : ''}
       <div class="ticket-total">TOTAL : ${order.total.toFixed(2)} €</div>
     </div>
@@ -142,6 +151,111 @@ document.getElementById('print-modal').addEventListener('click', e => {
   if (e.target === e.currentTarget) closePrint();
 });
 
+// ─── CLIENTS ─────────────────────────────────────
+async function loadClients() {
+  const res = await fetch('/api/clients');
+  const clients = await res.json();
+  const body = document.getElementById('clients-body');
+  if (!clients.length) {
+    body.innerHTML = '<tr><td colspan="7" class="loading">Aucun client pour le moment.</td></tr>';
+    return;
+  }
+  body.innerHTML = clients.map(c => {
+    const vip = c.orders_count >= 5 ? '<span class="client-vip">VIP</span>' : '';
+    return `<tr>
+      <td class="c-name">${c.name}${vip}</td>
+      <td class="c-phone">${c.phone}</td>
+      <td class="c-addr">${c.addresses.length ? c.addresses.join('<br>') : '—'}</td>
+      <td>${c.orders_count}</td>
+      <td class="c-spent">${fmt(c.total_spent)}</td>
+      <td>${fmt(c.avg_basket)}</td>
+      <td>${fmtDate(c.last_order)}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── STATISTIQUES ────────────────────────────────
+async function loadStats() {
+  const res = await fetch('/api/stats');
+  const s = await res.json();
+
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card highlight">
+      <div class="kpi-label">CA Total</div>
+      <div class="kpi-value">${fmt(s.ca_total)}</div>
+      <div class="kpi-sub">${s.orders_total} commandes</div>
+    </div>
+    <div class="kpi-card highlight">
+      <div class="kpi-label">CA Aujourd'hui</div>
+      <div class="kpi-value">${fmt(s.ca_today)}</div>
+      <div class="kpi-sub">${s.orders_today} commandes aujourd'hui</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Panier moyen</div>
+      <div class="kpi-value small">${fmt(s.avg_basket)}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Clients</div>
+      <div class="kpi-value small">${s.clients_count}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Promotions offertes</div>
+      <div class="kpi-value small">−${fmt(s.total_discount)}</div>
+      <div class="kpi-sub">Total des réductions accordées</div>
+    </div>
+  `;
+
+  const totalCA = s.ca_livraison + s.ca_emporter || 1;
+  document.getElementById('split-bars').innerHTML = `
+    <div class="split-bar-row">
+      <span class="split-bar-label">🛵 Livraison</span>
+      <div class="split-bar-track"><div class="split-bar-fill liv" style="width:${(s.ca_livraison/totalCA*100).toFixed(0)}%"></div></div>
+      <span class="split-bar-val">${fmt(s.ca_livraison)}</span>
+    </div>
+    <div class="split-bar-row">
+      <span class="split-bar-label">🛍️ À emporter</span>
+      <div class="split-bar-track"><div class="split-bar-fill emp" style="width:${(s.ca_emporter/totalCA*100).toFixed(0)}%"></div></div>
+      <span class="split-bar-val">${fmt(s.ca_emporter)}</span>
+    </div>
+    <div class="split-bar-row" style="margin-top:8px;color:var(--muted);font-size:.8rem;">
+      <span class="split-bar-label">Commandes</span>
+      <span>🛵 ${s.count_livraison} &nbsp;·&nbsp; 🛍️ ${s.count_emporter}</span>
+    </div>
+  `;
+
+  document.getElementById('top-list').innerHTML = s.top_items.length
+    ? s.top_items.map((it, i) => `
+      <div class="top-row">
+        <span class="top-rank">${i + 1}</span>
+        <span class="top-name">${it.name}</span>
+        <span class="top-qty">×${it.qty}</span>
+      </div>`).join('')
+    : '<p class="loading">Pas encore de données.</p>';
+}
+
+// ─── ONGLETS ─────────────────────────────────────
+let currentView = 'commandes';
+
+function switchView(view) {
+  currentView = view;
+  document.querySelectorAll('.bo-tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
+  document.querySelectorAll('.bo-view').forEach(v => v.style.display = 'none');
+  document.getElementById('view-' + view).style.display = 'block';
+  document.getElementById('orders-controls').style.visibility = view === 'commandes' ? 'visible' : 'hidden';
+  refresh();
+}
+
+document.querySelectorAll('.bo-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchView(tab.dataset.view));
+});
+
+// Rafraîchit la vue active
+function refresh() {
+  if (currentView === 'commandes') loadOrders();
+  else if (currentView === 'clients') loadClients();
+  else if (currentView === 'stats') loadStats();
+}
+
 // Filtre date par défaut = aujourd'hui
 const today = new Date().toISOString().split('T')[0];
 document.getElementById('filter-date').value = today;
@@ -149,6 +263,6 @@ document.getElementById('filter-date').value = today;
 document.getElementById('filter-date').addEventListener('change', loadOrders);
 document.getElementById('filter-status').addEventListener('change', loadOrders);
 
-// Auto-refresh toutes les 30s
+// Init + auto-refresh toutes les 30s
 loadOrders();
-setInterval(loadOrders, 30000);
+setInterval(refresh, 30000);

@@ -1,32 +1,22 @@
 const express = require('express');
 const path = require('path');
-const Database = require('better-sqlite3');
+const fs = require('fs');
 
 const app = express();
-const db = new Database('orders.db');
+const DB_FILE = path.join(__dirname, 'orders.json');
 
-// Init DB
-db.exec(`
-  CREATE TABLE IF NOT EXISTS orders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    numero TEXT UNIQUE NOT NULL,
-    client_name TEXT NOT NULL,
-    client_phone TEXT NOT NULL,
-    type TEXT NOT NULL CHECK(type IN ('emporter', 'livraison')),
-    adresse TEXT,
-    creneau TEXT NOT NULL,
-    items TEXT NOT NULL,
-    total REAL NOT NULL,
-    status TEXT NOT NULL DEFAULT 'en_attente',
-    notes TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-`);
+function readDB() {
+  if (!fs.existsSync(DB_FILE)) return { orders: [], nextId: 1 };
+  try { return JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); } catch { return { orders: [], nextId: 1 }; }
+}
+
+function writeDB(db) {
+  fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
+}
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Générer un numéro de commande unique
 function genNumero() {
   const now = new Date();
   const pad = n => String(n).padStart(2, '0');
@@ -42,53 +32,54 @@ app.post('/api/orders', (req, res) => {
   if (type === 'livraison' && !adresse) {
     return res.status(400).json({ error: 'Adresse requise pour la livraison' });
   }
-  const numero = genNumero();
-  const stmt = db.prepare(`
-    INSERT INTO orders (numero, client_name, client_phone, type, adresse, creneau, items, total, notes)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `);
-  const result = stmt.run(numero, client_name, client_phone, type, adresse || null, creneau, JSON.stringify(items), total, notes || null);
-  const order = db.prepare('SELECT * FROM orders WHERE id = ?').get(result.lastInsertRowid);
-  order.items = JSON.parse(order.items);
+  const db = readDB();
+  const order = {
+    id: db.nextId++,
+    numero: genNumero(),
+    client_name, client_phone, type,
+    adresse: adresse || null,
+    creneau, items, total,
+    notes: notes || null,
+    status: 'en_attente',
+    created_at: new Date().toISOString()
+  };
+  db.orders.push(order);
+  writeDB(db);
   res.status(201).json(order);
 });
 
-// Lister les commandes (back-office)
+// Lister les commandes
 app.get('/api/orders', (req, res) => {
   const { status, date } = req.query;
-  let sql = 'SELECT * FROM orders WHERE 1=1';
-  const params = [];
-  if (status) { sql += ' AND status = ?'; params.push(status); }
-  if (date) { sql += ' AND DATE(created_at) = ?'; params.push(date); }
-  sql += ' ORDER BY created_at DESC';
-  const rows = db.prepare(sql).all(...params);
-  rows.forEach(r => { r.items = JSON.parse(r.items); });
-  res.json(rows);
+  const db = readDB();
+  let orders = [...db.orders].reverse();
+  if (status) orders = orders.filter(o => o.status === status);
+  if (date) orders = orders.filter(o => o.created_at.startsWith(date));
+  res.json(orders);
+});
+
+// Détail d'une commande
+app.get('/api/orders/:id', (req, res) => {
+  const db = readDB();
+  const order = db.orders.find(o => o.id === parseInt(req.params.id));
+  if (!order) return res.status(404).json({ error: 'Commande introuvable' });
+  res.json(order);
 });
 
 // Mettre à jour le statut
 app.patch('/api/orders/:id/status', (req, res) => {
   const { status } = req.body;
   const validStatuses = ['en_attente', 'en_preparation', 'pret', 'livre', 'annule'];
-  if (!validStatuses.includes(status)) {
-    return res.status(400).json({ error: 'Statut invalide' });
-  }
-  const result = db.prepare('UPDATE orders SET status = ? WHERE id = ?').run(status, req.params.id);
-  if (result.changes === 0) return res.status(404).json({ error: 'Commande introuvable' });
-  const order = db.prepare('SELECT * FROM orders WHERE id = ?').get(req.params.id);
-  order.items = JSON.parse(order.items);
-  res.json(order);
-});
-
-// Détail d'une commande
-app.get('/api/orders/:id', (req, res) => {
-  const order = db.prepare('SELECT * FROM orders WHERE id = ?').get(req.params.id);
+  if (!validStatuses.includes(status)) return res.status(400).json({ error: 'Statut invalide' });
+  const db = readDB();
+  const order = db.orders.find(o => o.id === parseInt(req.params.id));
   if (!order) return res.status(404).json({ error: 'Commande introuvable' });
-  order.items = JSON.parse(order.items);
+  order.status = status;
+  writeDB(db);
   res.json(order);
 });
 
-// Créneaux disponibles (30 min, de 11h à 14h et 18h à 22h)
+// Créneaux disponibles
 app.get('/api/creneaux', (req, res) => {
   const slots = [];
   const add = (h, m) => slots.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);

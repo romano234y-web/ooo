@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R'pizz — Back Office</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bo-page">
+
+<header class="bo-header">
+  <div class="header-inner">
+    <div class="logo">🍕 R'pizz — Back Office</div>
+    <div class="bo-controls">
+      <input type="date" id="filter-date" value="">
+      <select id="filter-status">
+        <option value="">Tous les statuts</option>
+        <option value="en_attente">En attente</option>
+        <option value="en_preparation">En préparation</option>
+        <option value="pret">Prêt</option>
+        <option value="livre">Livré / Remis</option>
+        <option value="annule">Annulé</option>
+      </select>
+      <button class="btn-refresh" onclick="loadOrders()">🔄 Actualiser</button>
+      <a href="/" class="btn-nav">Voir le site</a>
+    </div>
+  </div>
+</header>
+
+<main class="bo-main">
+  <div class="bo-stats" id="bo-stats"></div>
+
+  <div id="orders-container" class="orders-grid">
+    <p class="loading">Chargement...</p>
+  </div>
+</main>
+
+<!-- PRINT MODAL -->
+<div id="print-modal" class="overlay" style="display:none">
+  <div class="overlay-card print-card" id="print-content">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<script src="backoffice.js"></script>
+</body>
+</html>

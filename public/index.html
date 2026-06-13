@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R'pizz — Commandez en ligne</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="client-page">
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">🍕 R'pizz</div>
+    <nav>
+      <a href="#menu">La carte</a>
+      <a href="#commander" class="btn-nav">Commander</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Pizzas artisanales<br>livrées ou à emporter</h1>
+    <p>Pâte maison, ingrédients frais, cuisson au four à bois</p>
+    <a href="#commander" class="btn-primary">Commander maintenant</a>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="section">
+  <div class="container">
+    <h2 class="section-title">Notre carte</h2>
+
+    <div class="menu-category">
+      <h3>🍕 Pizzas Classiques</h3>
+      <div class="menu-grid" id="menu-classiques"></div>
+    </div>
+
+    <div class="menu-category">
+      <h3>🌿 Pizzas Signature</h3>
+      <div class="menu-grid" id="menu-signature"></div>
+    </div>
+
+    <div class="menu-category">
+      <h3>🥤 Boissons</h3>
+      <div class="menu-grid" id="menu-boissons"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMANDE -->
+<section id="commander" class="section section-dark">
+  <div class="container">
+    <h2 class="section-title">Votre commande</h2>
+
+    <div class="order-layout">
+      <!-- Panier -->
+      <div class="cart-panel">
+        <h3>Panier <span id="cart-count" class="badge">0</span></h3>
+        <div id="cart-items" class="cart-items">
+          <p class="empty-cart">Votre panier est vide.<br>Sélectionnez des articles ci-dessus.</p>
+        </div>
+        <div class="cart-total" id="cart-total-block" style="display:none">
+          <div class="total-line">Total : <strong id="cart-total">0,00 €</strong></div>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <form class="order-form" id="order-form">
+        <h3>Vos informations</h3>
+
+        <div class="form-group">
+          <label>Nom & Prénom *</label>
+          <input type="text" id="client_name" placeholder="Jean Dupont" required>
+        </div>
+        <div class="form-group">
+          <label>Téléphone *</label>
+          <input type="tel" id="client_phone" placeholder="06 12 34 56 78" required>
+        </div>
+
+        <h3>Type de commande</h3>
+        <div class="type-selector">
+          <label class="type-option">
+            <input type="radio" name="type" value="emporter" checked>
+            <span class="type-card">🛍️<br>À emporter</span>
+          </label>
+          <label class="type-option">
+            <input type="radio" name="type" value="livraison">
+            <span class="type-card">🛵<br>Livraison</span>
+          </label>
+        </div>
+
+        <div class="form-group" id="adresse-group" style="display:none">
+          <label>Adresse de livraison *</label>
+          <input type="text" id="adresse" placeholder="12 rue de la Paix, 75001 Paris">
+        </div>
+
+        <h3>Créneau horaire</h3>
+        <div class="form-group">
+          <select id="creneau" required>
+            <option value="">Choisissez un créneau...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Notes / Allergies</label>
+          <textarea id="notes" rows="2" placeholder="Sans gluten, sans anchois..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary btn-full" id="submit-btn">
+          Valider la commande
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIRMATION -->
+<div id="confirmation-overlay" class="overlay" style="display:none">
+  <div class="overlay-card">
+    <div class="confirm-icon">✅</div>
+    <h2>Commande confirmée !</h2>
+    <p>Numéro : <strong id="confirm-numero"></strong></p>
+    <p id="confirm-type"></p>
+    <p>Créneau : <strong id="confirm-creneau"></strong></p>
+    <p class="confirm-sub">Vous serez contacté au besoin. Merci et à bientôt !</p>
+    <button class="btn-primary" onclick="closeConfirm()">Nouvelle commande</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>🍕 R'pizz — Fait maison avec passion</p>
+</footer>
+
+<script src="menu.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

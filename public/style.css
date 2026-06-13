@@ -565,7 +565,9 @@ footer {
   border-bottom: 1px solid var(--border);
   position: sticky; top: 0; z-index: 100;
 }
-.bo-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bo-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-left: auto; }
+.bo-header .header-inner { padding: 16px 32px; }
+.bo-header .logo { font-size: 1.3rem; }
 .bo-controls input,
 .bo-controls select {
   padding: 8px 14px; border-radius: var(--radius-sm);

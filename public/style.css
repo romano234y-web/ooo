@@ -311,7 +311,9 @@ button { font-family: inherit; cursor: pointer; border: none; }
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, var(--yellow-glow), transparent);
   opacity: 0; transition: opacity var(--transition);
+  pointer-events: none;
 }
+.menu-card > * { position: relative; z-index: 1; }
 .menu-card:hover { transform: translateY(-3px); border-color: var(--border-2); box-shadow: var(--shadow); }
 .menu-card:hover::before { opacity: 1; }
 .menu-card.in-cart {

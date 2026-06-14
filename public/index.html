@@ -6,7 +6,7 @@
   <title>R'pizz — Pizzeria Châteauneuf-en-Thymerais</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -15,190 +15,171 @@
   <div class="header-inner">
     <a href="#" class="logo">R'<em>pizz</em></a>
     <nav class="main-nav">
-      <a href="#histoire">Notre histoire</a>
-      <a href="#valeurs">Nos valeurs</a>
+      <a href="#histoire">Histoire</a>
+      <a href="#valeurs">Valeurs</a>
       <a href="#commander">Commander</a>
     </nav>
-    <a href="#commander" class="btn-cta">Commander <span>→</span></a>
-    <button class="burger-toggle" id="burger-toggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="#commander" class="btn-cta">Commander →</a>
+    <button class="burger-toggle" id="burger-toggle"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-nav" id="mobile-nav">
-    <a href="#histoire" onclick="closeMobileNav()">Notre histoire</a>
-    <a href="#valeurs" onclick="closeMobileNav()">Nos valeurs</a>
+    <a href="#histoire" onclick="closeMobileNav()">Histoire</a>
+    <a href="#valeurs" onclick="closeMobileNav()">Valeurs</a>
     <a href="#commander" onclick="closeMobileNav()">Commander</a>
   </div>
 </header>
 
 <!-- ── HERO ── -->
-<section class="hero" id="home">
-  <div class="hero-bg">
-    <div class="hero-circle c1"></div>
-    <div class="hero-circle c2"></div>
-    <div class="hero-circle c3"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge">🍕 Pizzeria artisanale · Châteauneuf-en-Thymerais</div>
-    <h1>La pizza comme<br><em>on l'aime vraiment</em></h1>
-    <p>Pâte pétrie à la main, sauce maison, produits frais sélectionnés.<br>Une vraie pizzeria, pas une chaîne.</p>
-    <div class="hero-actions">
-      <a href="#commander" class="btn-primary">Commander maintenant</a>
-      <a href="#histoire" class="btn-ghost">Notre histoire</a>
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">🍕 Châteauneuf-en-Thymerais · Depuis toujours</div>
+      <h1 class="hero-title">
+        <span class="title-line">LA</span>
+        <span class="title-line accent">VRAIE</span>
+        <span class="title-line">PIZZA.</span>
+      </h1>
+      <p class="hero-sub">Pâte maison. Ingrédients frais.<br>Cuisson au four. Zéro compromis.</p>
+      <div class="hero-btns">
+        <a href="#commander" class="btn-primary">Commander maintenant</a>
+        <a href="#histoire" class="btn-outline">Notre histoire</a>
+      </div>
     </div>
-    <div class="hero-promos">
-      <div class="promo-item">
-        <span class="promo-icon">🏠</span>
-        <div><strong>Sur place & emporter</strong><br>1 achetée = 1 offerte</div>
-      </div>
-      <div class="promo-divider"></div>
-      <div class="promo-item">
-        <span class="promo-icon">🛵</span>
-        <div><strong>En livraison</strong><br>1 achetée = la 2ème à −50%</div>
-      </div>
-      <div class="promo-divider"></div>
-      <div class="promo-item">
-        <span class="promo-icon">🎁</span>
-        <div><strong>En livraison</strong><br>2 achetées = la 3ème offerte</div>
+    <div class="hero-right">
+      <div class="hero-pizza-wrap">
+        <div class="hero-pizza-bg"></div>
+        <div class="hero-pizza-spin">🍕</div>
+        <div class="hero-badge-float">FAIT<br>MAISON</div>
       </div>
     </div>
   </div>
-  <div class="hero-scroll">
-    <span>Découvrir</span>
-    <div class="scroll-arrow"></div>
+
+  <!-- Promos -->
+  <div class="hero-promos">
+    <div class="promo-block">
+      <span class="pb-icon">🏠</span>
+      <div>
+        <strong>Sur place & emporter</strong>
+        <span>1 achetée = 1 offerte</span>
+      </div>
+    </div>
+    <div class="pb-sep"></div>
+    <div class="promo-block">
+      <span class="pb-icon">🛵</span>
+      <div>
+        <strong>Livraison</strong>
+        <span>1 achetée = la 2ème à −50%</span>
+      </div>
+    </div>
+    <div class="pb-sep"></div>
+    <div class="promo-block">
+      <span class="pb-icon">🎁</span>
+      <div>
+        <strong>Livraison</strong>
+        <span>2 achetées = la 3ème offerte</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ── HORAIRES BANNER ── -->
-<div class="hours-banner">
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>FAIT MAISON</span><span class="dot">★</span>
+    <span>INGRÉDIENTS FRAIS</span><span class="dot">★</span>
+    <span>CUISSON AU FOUR</span><span class="dot">★</span>
+    <span>LIVRAISON</span><span class="dot">★</span>
+    <span>À EMPORTER</span><span class="dot">★</span>
+    <span>SUR PLACE</span><span class="dot">★</span>
+    <span>FAIT MAISON</span><span class="dot">★</span>
+    <span>INGRÉDIENTS FRAIS</span><span class="dot">★</span>
+    <span>CUISSON AU FOUR</span><span class="dot">★</span>
+    <span>LIVRAISON</span><span class="dot">★</span>
+    <span>À EMPORTER</span><span class="dot">★</span>
+    <span>SUR PLACE</span><span class="dot">★</span>
+  </div>
+</div>
+
+<!-- ── HORAIRES ── -->
+<div class="hours-strip">
   <div class="hours-inner">
-    <div class="hours-item"><span>📍</span> 31 rue Jean Moulin, 28170 Châteauneuf-en-Thymerais</div>
-    <div class="hours-sep">·</div>
-    <div class="hours-item"><span>📞</span> 02 80.67.78.96</div>
-    <div class="hours-sep">·</div>
-    <div class="hours-item"><span>🕐</span> Lun & Mer–Sam : 11h30–14h / 18h–22h30</div>
-    <div class="hours-sep">·</div>
-    <div class="hours-item"><span>🕐</span> Dim : 18h–22h30</div>
+    <div class="h-item"><span>📍</span>31 rue Jean Moulin, 28170 Châteauneuf-en-Thymerais</div>
+    <div class="h-dot"></div>
+    <div class="h-item"><span>📞</span>02 80.67.78.96</div>
+    <div class="h-dot"></div>
+    <div class="h-item"><span>🕐</span>Lun & Mer–Sam : 11h30–14h / 18h–22h30</div>
+    <div class="h-dot"></div>
+    <div class="h-item"><span>🕐</span>Dim : 18h–22h30</div>
   </div>
 </div>
 
 <!-- ── HISTOIRE ── -->
-<section id="histoire" class="section">
+<section id="histoire" class="section section-story">
   <div class="container">
-    <div class="story-grid">
-      <div class="story-visual">
-        <div class="story-emoji-stack">
-          <div class="story-emoji-card se1">🍕</div>
-          <div class="story-emoji-card se2">👨‍🍳</div>
-          <div class="story-emoji-card se3">🔥</div>
-          <div class="story-glow"></div>
-        </div>
-      </div>
-      <div class="story-text">
-        <p class="section-label">Notre histoire</p>
-        <h2>Une pizzeria née<br><em>de la passion</em></h2>
-        <p class="story-lead">R'pizz, c'est l'histoire d'une famille qui a mis tout son cœur dans une seule chose : faire de vraies pizzas, comme en Italie, mais avec les saveurs d'ici.</p>
-        <p>Chaque jour, nous préparons notre pâte à la main, nous choisissons nos ingrédients avec soin et nous les cuisinons au four pour vous offrir une expérience authentique.</p>
-        <p>Pas de surgélé, pas de compromis. Juste du bon, du vrai, du fait maison.</p>
-        <div class="story-quote">
-          <span class="quote-mark">"</span>
-          La meilleure pizza, c'est celle qu'on fait avec passion.
-        </div>
+    <div class="story-layout">
+      <div class="story-giant-text" aria-hidden="true">R'PIZZ</div>
+      <div class="story-content">
+        <p class="section-eyebrow">/ Notre histoire</p>
+        <h2 class="section-title">Une passion,<br><em>une pizza.</em></h2>
+        <p class="story-lead">Chez R'pizz, on n'a pas choisi la facilité. On a choisi de faire les choses bien — pâte pétrie à la main chaque matin, sauce préparée avec des tomates mûres, ingrédients sélectionnés avec soin.</p>
+        <p>Pas de surgélé, pas de compromis. Juste du bon, du vrai, du fait maison. Une vraie pizzeria comme on les aime.</p>
+        <blockquote class="story-quote">
+          "La meilleure pizza, c'est celle qu'on fait avec passion."
+        </blockquote>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── VALEURS ── -->
-<section id="valeurs" class="section section-alt">
+<section id="valeurs" class="section section-dark-alt">
   <div class="container">
-    <div class="section-head">
-      <p class="section-label">Ce qui nous définit</p>
-      <h2>Nos valeurs,<br><em>votre satisfaction</em></h2>
-    </div>
+    <p class="section-eyebrow centered">/ Nos valeurs</p>
+    <h2 class="section-title centered">Ce qui nous<br><em>définit.</em></h2>
     <div class="values-grid">
       <div class="value-card">
-        <div class="value-icon">🌾</div>
+        <div class="vc-number">01</div>
+        <div class="vc-icon">🌾</div>
         <h3>Ingrédients frais</h3>
-        <p>Nous sélectionnons chaque ingrédient avec soin. Légumes frais, viandes de qualité, fromages fondants — rien n'est laissé au hasard.</p>
+        <p>Légumes frais, viandes de qualité, fromages fondants — chaque ingrédient est choisi avec soin, chaque jour.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon">👐</div>
-        <h3>Fait maison</h3>
-        <p>Pâte pétrie chaque matin, sauce tomate préparée avec des tomates mûries au soleil. Ici, tout est fait avec les mains, avec amour.</p>
+        <div class="vc-number">02</div>
+        <div class="vc-icon">👐</div>
+        <h3>Tout fait maison</h3>
+        <p>Pâte pétrie chaque matin, sauce maison, garnitures généreuses. Ici, tout est fait avec les mains.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon">🔥</div>
+        <div class="vc-number">03</div>
+        <div class="vc-icon">🔥</div>
         <h3>Cuisson parfaite</h3>
-        <p>Le four, c'est l'âme de la pizzeria. Une cuisson précise pour une pâte croustillante à l'extérieur, moelleuse à l'intérieur, à chaque fois.</p>
+        <p>Croustillante à l'extérieur, moelleuse à l'intérieur. La cuisson, c'est l'art de la pizzeria.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon">❤️</div>
+        <div class="vc-number">04</div>
+        <div class="vc-icon">❤️</div>
         <h3>Service local</h3>
-        <p>Nous livrons dans toute la zone, nous accueillons sur place avec le sourire. Chez R'pizz, vous êtes chez vous.</p>
+        <p>Livraison, emporter, sur place — on est là pour vous, avec le sourire, à chaque commande.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── CHIFFRES ── -->
-<section class="section section-numbers">
-  <div class="container">
-    <div class="numbers-grid">
-      <div class="number-item">
-        <strong>21+</strong>
-        <span>Pizzas au menu</span>
-      </div>
-      <div class="number-divider"></div>
-      <div class="number-item">
-        <strong>3</strong>
-        <span>Tailles disponibles</span>
-      </div>
-      <div class="number-divider"></div>
-      <div class="number-item">
-        <strong>100%</strong>
-        <span>Fait maison</span>
-      </div>
-      <div class="number-divider"></div>
-      <div class="number-item">
-        <strong>0</strong>
-        <span>Compromis sur la qualité</span>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="numbers-band">
+  <div class="nb-item"><strong>21<span>+</span></strong><span>Pizzas</span></div>
+  <div class="nb-sep">|</div>
+  <div class="nb-item"><strong>3</strong><span>Tailles</span></div>
+  <div class="nb-sep">|</div>
+  <div class="nb-item"><strong>100<span>%</span></strong><span>Fait maison</span></div>
+  <div class="nb-sep">|</div>
+  <div class="nb-item"><strong>0</strong><span>Compromis</span></div>
+</div>
 
-<!-- ── TÉMOIGNAGES ── -->
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head">
-      <p class="section-label">Ce qu'ils en disent</p>
-      <h2>Nos clients,<br><em>nos meilleurs ambassadeurs</em></h2>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">⭐⭐⭐⭐⭐</div>
-        <p>"La meilleure pizza de la région sans hésiter. La pâte est incroyable, légère et croustillante. Je commande deux fois par semaine !"</p>
-        <div class="review-author">— Sophie M.</div>
-      </div>
-      <div class="review-card review-featured">
-        <div class="review-stars">⭐⭐⭐⭐⭐</div>
-        <p>"La R'pizz au menu, c'est une tuerie. On voit vraiment que c'est fait maison, les ingrédients sont frais et les quantités généreuses. Livraison rapide en plus !"</p>
-        <div class="review-author">— Thomas B.</div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">⭐⭐⭐⭐⭐</div>
-        <p>"Enfin une vraie pizzeria dans le coin ! La Tartiflette est à tomber. Et les promotions en livraison, c'est un vrai plus. Merci R'pizz !"</p>
-        <div class="review-author">— Isabelle R.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── ANIMATION APPÉTIT ── -->
+<!-- ── PIZZA ANIMATION ── -->
 <section class="pizza-anim-section">
-  <h2>Fraîchement préparée, <em>juste pour vous</em></h2>
-  <p>Garnie à la commande, cuite à point</p>
+  <div class="pa-bg-text" aria-hidden="true">PIZZA</div>
   <div class="pizza-stage">
     <div class="steam"><span></span><span></span><span></span></div>
     <div class="ingredient-drop i1">🍅</div>
@@ -206,28 +187,51 @@
     <div class="ingredient-drop i3">🌿</div>
     <div class="pizza-spin"></div>
   </div>
-  <div class="appetite-row">
-    <div class="appetite-pill"><span>🌾</span> Pâte maison</div>
-    <div class="appetite-pill"><span>🍅</span> Sauce maison</div>
-    <div class="appetite-pill"><span>🧀</span> Ingrédients frais</div>
-    <div class="appetite-pill"><span>🔥</span> Cuisson au four</div>
+  <div class="pa-labels">
+    <div class="pa-label">🌾 Pâte maison</div>
+    <div class="pa-label">🍅 Sauce maison</div>
+    <div class="pa-label">🧀 Fromages frais</div>
+    <div class="pa-label">🔥 Cuisson au four</div>
+  </div>
+</section>
+
+<!-- ── TÉMOIGNAGES ── -->
+<section class="section section-reviews">
+  <div class="container">
+    <p class="section-eyebrow centered">/ Ce qu'ils en disent</p>
+    <h2 class="section-title centered">Nos clients,<br><em>nos meilleurs fans.</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"La meilleure pizza de la région. Pâte incroyable, légère et croustillante. Je commande deux fois par semaine !"</p>
+        <strong>— Sophie M.</strong>
+      </div>
+      <div class="review-card review-big">
+        <div class="review-stars">★★★★★</div>
+        <p>"On voit vraiment que c'est fait maison. Les ingrédients sont frais, les quantités généreuses. Et la livraison est rapide en plus !"</p>
+        <strong>— Thomas B.</strong>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"La Tartiflette est à tomber. Et les promotions en livraison, c'est un vrai plus. Merci R'pizz !"</p>
+        <strong>— Isabelle R.</strong>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ── COMMANDER ── -->
-<section id="commander" class="section">
+<section id="commander" class="section section-order">
   <div class="container">
-    <div class="section-head">
-      <p class="section-label">Commande en ligne</p>
-      <h2>Qu'est-ce qui vous<br><em>fait envie ?</em></h2>
-      <div class="sizes-info">
-        <div class="size-tag">Junior <strong>8€</strong></div>
-        <div class="size-tag">Senior <strong>10€</strong></div>
-        <div class="size-tag mega-tag">Méga <strong>15€</strong></div>
-      </div>
+    <p class="section-eyebrow centered">/ Commande en ligne</p>
+    <h2 class="section-title centered">Qu'est-ce qui vous<br><em>fait envie ?</em></h2>
+
+    <div class="sizes-bar">
+      <div class="sz">Junior <strong>8€</strong></div>
+      <div class="sz">Senior <strong>10€</strong></div>
+      <div class="sz highlight">Méga <strong>15€</strong></div>
     </div>
 
-    <!-- Onglets -->
     <div class="cat-tabs" id="cat-tabs">
       <button class="cat-tab active" data-cat="pizzas_tomate">🍅 Base Tomate</button>
       <button class="cat-tab" data-cat="pizzas_creme">🥛 Base Crème</button>
@@ -239,14 +243,11 @@
     </div>
 
     <div class="order-layout">
-      <!-- Menu + Formulaire -->
       <div class="order-left">
         <div id="menu-container"></div>
-
-        <div class="form-section" style="margin-top: 40px;">
-          <form id="order-form" class="order-form">
-            <h3><span class="step">✦</span> Finaliser ma commande</h3>
-
+        <div class="form-block" style="margin-top:48px">
+          <form id="order-form">
+            <h3 class="form-title">✦ Finaliser ma commande</h3>
             <div class="form-row">
               <div class="form-group">
                 <label>Nom & Prénom *</label>
@@ -257,45 +258,31 @@
                 <input type="tel" id="client_phone" placeholder="06 12 34 56 78" required>
               </div>
             </div>
-
-            <label style="font-size:.82rem;font-weight:600;color:var(--muted);display:block;margin-bottom:10px;">Mode de réception</label>
-            <div class="type-selector" style="margin-bottom:16px;">
+            <label class="field-label">Mode de réception</label>
+            <div class="type-selector">
               <label class="type-card">
                 <input type="radio" name="type" value="emporter" checked>
-                <div class="type-card-inner">
-                  <span class="type-icon">🛍️</span>
-                  <strong>À emporter</strong>
-                  <small>Récupérez sur place</small>
-                </div>
+                <div class="type-card-inner"><span>🛍️</span><strong>À emporter</strong><small>Récupérez sur place</small></div>
               </label>
               <label class="type-card">
                 <input type="radio" name="type" value="livraison">
-                <div class="type-card-inner">
-                  <span class="type-icon">🛵</span>
-                  <strong>Livraison</strong>
-                  <small>Livré chez vous</small>
-                </div>
+                <div class="type-card-inner"><span>🛵</span><strong>Livraison</strong><small>Livré chez vous</small></div>
               </label>
             </div>
-
-            <div class="form-group" id="adresse-group" style="display:none;margin-bottom:16px;">
+            <div class="form-group" id="adresse-group" style="display:none">
               <label>Adresse de livraison *</label>
               <input type="text" id="adresse" placeholder="12 rue de la Paix, Châteauneuf-en-Thymerais">
             </div>
-
             <div class="form-row">
               <div class="form-group">
                 <label>Créneau horaire *</label>
-                <select id="creneau" required>
-                  <option value="">Choisissez un créneau...</option>
-                </select>
+                <select id="creneau" required><option value="">Choisissez...</option></select>
               </div>
               <div class="form-group">
                 <label>Notes / Allergies</label>
                 <input type="text" id="notes" placeholder="Sans gluten, bien cuit...">
               </div>
             </div>
-
             <button type="submit" class="btn-submit" id="submit-btn">
               <span>Valider ma commande</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -304,25 +291,19 @@
         </div>
       </div>
 
-      <!-- Panier sticky -->
       <aside class="cart-aside">
         <div class="cart-panel">
-          <div class="cart-header">
-            <h3>🛒 Mon panier</h3>
+          <div class="cart-head">
+            <h3>Mon panier</h3>
             <span class="cart-badge" id="cart-count">0</span>
           </div>
           <div id="cart-items">
             <div class="cart-empty">
-              <div class="cart-empty-icon">🍕</div>
-              <p>Votre panier est vide</p>
+              <div style="font-size:2.5rem;opacity:.3;margin-bottom:8px">🍕</div>
+              <p>Panier vide</p>
             </div>
           </div>
-          <div id="cart-total-block" class="cart-footer" style="display:none">
-            <div class="cart-total-line">
-              <span>Total</span>
-              <strong id="cart-total">0,00 €</strong>
-            </div>
-          </div>
+          <div id="cart-total-block" class="cart-foot" style="display:none"></div>
         </div>
       </aside>
     </div>
@@ -345,24 +326,26 @@
 </div>
 
 <!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">R'<em>pizz</em></div>
-      <p style="color:var(--muted);font-size:.85rem;margin-top:12px;max-width:220px;line-height:1.7;">La pizzeria artisanale de Châteauneuf-en-Thymerais.</p>
-    </div>
-    <div class="footer-info">
-      <p><strong style="color:var(--white)">Nous trouver</strong></p>
-      <p>📍 31 rue Jean Moulin</p>
-      <p>28170 Châteauneuf-en-Thymerais</p>
-      <p>📞 02 80.67.78.96</p>
-    </div>
-    <div class="footer-hours">
-      <p><strong style="color:var(--white)">Horaires</strong></p>
-      <p><strong>Lundi :</strong> 11h30–14h / 18h–22h30</p>
-      <p><strong>Mercredi–Samedi :</strong> 11h30–14h / 18h–22h30</p>
-      <p><strong>Dimanche :</strong> 18h–22h30</p>
-      <p style="margin-top:8px;color:#e74c3c;font-size:.8rem;">Fermé le Mardi</p>
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logo">R'<em>pizz</em></div>
+    <div class="footer-cols">
+      <div>
+        <p class="fc-title">Nous trouver</p>
+        <p>31 rue Jean Moulin<br>28170 Châteauneuf-en-Thymerais</p>
+        <p>📞 02 80.67.78.96</p>
+      </div>
+      <div>
+        <p class="fc-title">Horaires</p>
+        <p><strong>Lundi :</strong> 11h30–14h / 18h–22h30</p>
+        <p><strong>Mer–Sam :</strong> 11h30–14h / 18h–22h30</p>
+        <p><strong>Dimanche :</strong> 18h–22h30</p>
+        <p class="closed">Fermé le Mardi</p>
+      </div>
+      <div>
+        <p class="fc-title">Commander</p>
+        <a href="#commander" class="footer-cta">Commander en ligne →</a>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">© 2026 R'pizz · Fait avec ❤️ à Châteauneuf-en-Thymerais</div>

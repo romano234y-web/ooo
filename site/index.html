@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05080a" />
+  <title>Nexa IA — Automatisez votre entreprise avec l'intelligence artificielle</title>
+  <meta name="description" content="Nexa IA conçoit des automatisations sur mesure, des agents de service client et des systèmes de prise de commande intelligents pour restaurants, coiffeurs, artisans et PME. Disponible 24/7, sans embaucher." />
+  <meta name="author" content="Nexa IA" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nexa IA — Automatisez votre entreprise avec l'IA" />
+  <meta property="og:description" content="Automatisations sur mesure, service client IA et prise de commande intelligente pour les entreprises." />
+  <meta property="og:locale" content="fr_FR" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="brand" aria-label="Nexa IA — accueil">
+        <span class="brand__mark">◆</span>
+        <span class="brand__name">Nexa<span class="brand__accent">IA</span></span>
+      </a>
+
+      <nav class="nav__links" aria-label="Navigation principale">
+        <a href="#services">Services</a>
+        <a href="#secteurs">Secteurs</a>
+        <a href="#methode">Méthode</a>
+        <a href="#realisations">Cas d'usage</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a href="#contact" class="btn btn--ghost nav__contact">Contact</a>
+        <a href="#" data-cta="calendly" class="btn btn--primary">Réserver un appel</a>
+      </div>
+
+      <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobilemenu" id="mobilemenu" aria-hidden="true">
+      <a href="#services">Services</a>
+      <a href="#secteurs">Secteurs</a>
+      <a href="#methode">Méthode</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="#" data-cta="calendly" class="btn btn--primary btn--block">Réserver un appel</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="orb orb--1"></div>
+        <div class="orb orb--2"></div>
+        <div class="grid-overlay"></div>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="badge reveal" data-reveal>
+          <span class="dot"></span> Agence d'automatisation IA · Disponibilités limitées
+        </div>
+
+        <h1 class="hero__title reveal" data-reveal>
+          Automatisez votre entreprise.<br />
+          <span class="gradient-text">Ne perdez plus jamais un client.</span>
+        </h1>
+
+        <p class="hero__sub reveal" data-reveal>
+          Je conçois des <strong>automatisations sur mesure</strong>, des <strong>agents de service client</strong>
+          et des systèmes de <strong>prise de commande &amp; réservation</strong> intelligents.
+          Pour les restaurants, coiffeurs, artisans et PME. Disponible 24h/24 — sans embaucher.
+        </p>
+
+        <div class="hero__cta reveal" data-reveal>
+          <a href="#" data-cta="calendly" class="btn btn--primary btn--lg">
+            Réserver un appel gratuit
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#services" class="btn btn--ghost btn--lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+            Découvrir mes services
+          </a>
+        </div>
+
+        <div class="hero__stats reveal" data-reveal>
+          <div class="stat"><span class="stat__num" data-count="70" data-suffix="%">0</span><span class="stat__label">de tâches répétitives en moins</span></div>
+          <div class="stat"><span class="stat__num">24/7</span><span class="stat__label">disponibilité, jour &amp; nuit</span></div>
+          <div class="stat"><span class="stat__num" data-count="2" data-prefix="&lt; ">0</span><span class="stat__label">semaines de mise en place</span></div>
+          <div class="stat"><span class="stat__num">100%</span><span class="stat__label">sur mesure pour votre métier</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MARQUEE SECTEURS ===================== -->
+    <section class="marquee" aria-label="Secteurs accompagnés">
+      <div class="marquee__track">
+        <span>Restaurants</span><span>•</span><span>Coiffeurs &amp; instituts</span><span>•</span>
+        <span>Artisans &amp; BTP</span><span>•</span><span>E-commerce</span><span>•</span>
+        <span>Immobilier</span><span>•</span><span>Garages</span><span>•</span>
+        <span>Salles de sport</span><span>•</span><span>Santé &amp; bien-être</span><span>•</span>
+        <!-- duplicate for seamless loop -->
+        <span>Restaurants</span><span>•</span><span>Coiffeurs &amp; instituts</span><span>•</span>
+        <span>Artisans &amp; BTP</span><span>•</span><span>E-commerce</span><span>•</span>
+        <span>Immobilier</span><span>•</span><span>Garages</span><span>•</span>
+        <span>Salles de sport</span><span>•</span><span>Santé &amp; bien-être</span><span>•</span>
+      </div>
+    </section>
+
+    <!-- ===================== PROBLÈME ===================== -->
+    <section class="section" id="probleme">
+      <div class="container">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">Le constat</span>
+          <h2 class="section__title">Et si votre entreprise tournait <span class="gradient-text">même quand vous dormez&nbsp;?</span></h2>
+          <p class="section__lead">Chaque appel manqué, chaque message sans réponse et chaque tâche faite à la main, c'est du temps perdu… et des clients qui vont chez le concurrent.</p>
+        </div>
+
+        <div class="pains">
+          <div class="pain reveal" data-reveal>
+            <div class="pain__icon">📞</div>
+            <h3>Appels &amp; messages ratés</h3>
+            <p>Vous êtes occupé, le téléphone sonne dans le vide. Le client réserve ailleurs en 30 secondes.</p>
+          </div>
+          <div class="pain reveal" data-reveal>
+            <div class="pain__icon">⏳</div>
+            <h3>Tâches répétitives</h3>
+            <p>Devis, relances, prises de RDV, saisies… des heures chaque semaine sur du travail sans valeur.</p>
+          </div>
+          <div class="pain reveal" data-reveal>
+            <div class="pain__icon">🌙</div>
+            <h3>Fermé = invisible</h3>
+            <p>La nuit et le week-end, vos clients veulent réserver ou commander. Personne ne répond.</p>
+          </div>
+          <div class="pain reveal" data-reveal>
+            <div class="pain__icon">⚠️</div>
+            <h3>Erreurs &amp; oublis</h3>
+            <p>Commandes notées à la va-vite, double réservations, infos perdues. La qualité en pâtit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="section section--alt" id="services">
+      <div class="container">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">Ce que je fais pour vous</span>
+          <h2 class="section__title">Des solutions IA <span class="gradient-text">clé en main</span></h2>
+          <p class="section__lead">Pas de jargon, pas de projet à rallonge. Des automatisations concrètes, branchées à vos outils, qui vous rapportent dès la première semaine.</p>
+        </div>
+
+        <div class="services">
+          <article class="service reveal" data-reveal>
+            <div class="service__icon">⚙️</div>
+            <h3>Automatisations sur mesure</h3>
+            <p>Reliez vos outils et supprimez les tâches manuelles : devis &amp; factures, relances clients, CRM, emails, Google Sheets, agendas…</p>
+            <ul class="ticks">
+              <li>Workflows automatiques entre vos applis</li>
+              <li>Relances &amp; suivis sans y penser</li>
+              <li>Reporting et données centralisées</li>
+            </ul>
+          </article>
+
+          <article class="service service--featured reveal" data-reveal>
+            <div class="service__tag">Le plus demandé</div>
+            <div class="service__icon">💬</div>
+            <h3>Service client IA 24/7</h3>
+            <p>Un agent intelligent qui répond instantanément à vos clients, jour et nuit, sur votre site, WhatsApp ou Instagram.</p>
+            <ul class="ticks">
+              <li>Réponses immédiates aux questions fréquentes</li>
+              <li>Qualification &amp; collecte des demandes</li>
+              <li>Transfert vers vous quand c'est important</li>
+            </ul>
+          </article>
+
+          <article class="service reveal" data-reveal>
+            <div class="service__icon">🛎️</div>
+            <h3>Prise de commande &amp; réservation</h3>
+            <p>Vos clients commandent et réservent seuls, sans erreur et sans file d'attente. Idéal restaurant, coiffeur, click &amp; collect.</p>
+            <ul class="ticks">
+              <li>Commande / réservation en ligne 24/7</li>
+              <li>Back-office pour tout gérer en un coup d'œil</li>
+              <li>Moins d'erreurs, plus de ventes</li>
+            </ul>
+          </article>
+
+          <article class="service reveal" data-reveal>
+            <div class="service__icon">📲</div>
+            <h3>Agent vocal &amp; standard IA</h3>
+            <p>Ne ratez plus jamais un appel. Un assistant vocal répond, prend les rendez-vous et vous transmet l'essentiel.</p>
+            <ul class="ticks">
+              <li>Répond à 100% des appels</li>
+              <li>Prise de RDV automatique dans votre agenda</li>
+              <li>Résumé clair de chaque demande</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTEURS ===================== -->
+    <section class="section" id="secteurs">
+      <div class="container">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">Pour qui ?</span>
+          <h2 class="section__title">Pensé pour <span class="gradient-text">les commerces &amp; les PME</span></h2>
+          <p class="section__lead">Si votre activité a des clients à gérer ou des tâches qui reviennent, l'IA peut vous faire gagner du temps. Voici quelques exemples.</p>
+        </div>
+
+        <div class="sectors">
+          <div class="sector reveal" data-reveal><span class="sector__emoji">🍕</span><h4>Restaurants &amp; food</h4><p>Commande en ligne, click &amp; collect, réservations, fidélité.</p></div>
+          <div class="sector reveal" data-reveal><span class="sector__emoji">💇</span><h4>Coiffeurs &amp; instituts</h4><p>Prise de RDV 24/7, rappels automatiques, anti no-show.</p></div>
+          <div class="sector reveal" data-reveal><span class="sector__emoji">🔧</span><h4>Artisans &amp; BTP</h4><p>Devis automatiques, relances, suivi de chantier.</p></div>
+          <div class="sector reveal" data-reveal><span class="sector__emoji">🛒</span><h4>E-commerce</h4><p>Support client IA, suivi de commande, recommandations.</p></div>
+          <div class="sector reveal" data-reveal><span class="sector__emoji">🏠</span><h4>Immobilier</h4><p>Qualification des leads, prise de RDV de visite, relances.</p></div>
+          <div class="sector reveal" data-reveal><span class="sector__emoji">💪</span><h4>Salles de sport</h4><p>Inscriptions, réservation de cours, suivi des membres.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MÉTHODE ===================== -->
+    <section class="section section--alt" id="methode">
+      <div class="container">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">Comment ça se passe</span>
+          <h2 class="section__title">Une méthode simple, <span class="gradient-text">4 étapes</span></h2>
+          <p class="section__lead">De l'idée à la solution qui tourne toute seule. Vous restez concentré sur votre métier, je m'occupe de la technique.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step reveal" data-reveal>
+            <div class="step__num">01</div>
+            <h3>Audit gratuit</h3>
+            <p>Un appel de 30 min pour comprendre votre activité et repérer où l'IA vous fait gagner le plus.</p>
+          </li>
+          <li class="step reveal" data-reveal>
+            <div class="step__num">02</div>
+            <h3>Conception sur mesure</h3>
+            <p>Je construis la solution adaptée à VOTRE métier, vos outils et votre façon de travailler.</p>
+          </li>
+          <li class="step reveal" data-reveal>
+            <div class="step__num">03</div>
+            <h3>Déploiement</h3>
+            <p>On branche le tout à vos outils existants, sans friction, et on teste ensemble.</p>
+          </li>
+          <li class="step reveal" data-reveal>
+            <div class="step__num">04</div>
+            <h3>Suivi &amp; optimisation</h3>
+            <p>On mesure les résultats, on améliore, et votre entreprise scale sans effort.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== RÉSULTATS ===================== -->
+    <section class="section results" id="resultats">
+      <div class="container">
+        <div class="results__grid">
+          <div class="result reveal" data-reveal><span class="result__num" data-count="70" data-suffix="%">0</span><span class="result__label">jusqu'à de temps gagné sur les tâches répétitives</span></div>
+          <div class="result reveal" data-reveal><span class="result__num">24/7</span><span class="result__label">vos clients servis même la nuit &amp; le week-end</span></div>
+          <div class="result reveal" data-reveal><span class="result__num" data-count="30" data-prefix="+" data-suffix="%">0</span><span class="result__label">de demandes captées en plus en moyenne</span></div>
+          <div class="result reveal" data-reveal><span class="result__num" data-count="0" data-prefix="< 2 ">0</span><span class="result__label">semaines pour être opérationnel</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CAS D'USAGE ===================== -->
+    <section class="section section--alt" id="realisations">
+      <div class="container">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">Cas d'usage</span>
+          <h2 class="section__title">Concrètement, <span class="gradient-text">ça donne quoi&nbsp;?</span></h2>
+          <p class="section__lead">Quelques exemples de transformations que je mets en place selon votre métier. Du temps perdu… à un système qui travaille pour vous.</p>
+        </div>
+
+        <div class="cases">
+          <article class="case reveal" data-reveal>
+            <div class="case__head"><span class="case__emoji">🍽️</span><h3>Restaurant</h3></div>
+            <div class="case__ba">
+              <div class="ba ba--before"><span class="ba__tag">Avant</span><p>Le téléphone sonne en plein service, commandes notées à la main, erreurs et files d'attente.</p></div>
+              <div class="ba ba--after"><span class="ba__tag">Après</span><p>Commande en ligne 24/7, click &amp; collect, confirmation automatique. Le service reste fluide.</p></div>
+            </div>
+          </article>
+
+          <article class="case reveal" data-reveal>
+            <div class="case__head"><span class="case__emoji">💇</span><h3>Coiffeur / Institut</h3></div>
+            <div class="case__ba">
+              <div class="ba ba--before"><span class="ba__tag">Avant</span><p>Prises de RDV par téléphone, oublis, créneaux vides et clients qui ne se présentent pas.</p></div>
+              <div class="ba ba--after"><span class="ba__tag">Après</span><p>Réservation en ligne, rappels automatiques par SMS, agenda toujours rempli, moins de no-show.</p></div>
+            </div>
+          </article>
+
+          <article class="case reveal" data-reveal>
+            <div class="case__head"><span class="case__emoji">💬</span><h3>Service client</h3></div>
+            <div class="case__ba">
+              <div class="ba ba--before"><span class="ba__tag">Avant</span><p>Messages sans réponse le soir et le week-end, clients impatients qui partent à la concurrence.</p></div>
+              <div class="ba ba--after"><span class="ba__tag">Après</span><p>Un agent IA répond instantanément 24/7, qualifie la demande et vous transmet l'essentiel.</p></div>
+            </div>
+          </article>
+        </div>
+
+        <p class="cases__note">Chaque solution est conçue sur mesure pour votre activité. Parlons de la vôtre lors de l'audit gratuit.</p>
+      </div>
+    </section>
+
+    <!-- ===================== TÉMOIGNAGES ===================== -->
+    <section class="section" id="temoignages">
+      <div class="container">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">Ils en parlent</span>
+          <h2 class="section__title">Ce que ça change <span class="gradient-text">au quotidien</span></h2>
+        </div>
+        <div class="testimonials">
+          <figure class="testimonial reveal" data-reveal>
+            <div class="stars">★★★★★</div>
+            <blockquote>« Depuis l'agent IA, on ne rate plus aucune réservation le soir. Le téléphone ne nous interrompt plus en plein service. »</blockquote>
+            <figcaption><span class="avatar">R</span><div><strong>Gérant</strong><small>Restaurant</small></div></figcaption>
+          </figure>
+          <figure class="testimonial reveal" data-reveal>
+            <div class="stars">★★★★★</div>
+            <blockquote>« Mes clientes prennent rendez-vous seules, 24h/24. J'ai gagné plusieurs heures par semaine et beaucoup moins d'oublis. »</blockquote>
+            <figcaption><span class="avatar">S</span><div><strong>Gérante</strong><small>Salon de coiffure</small></div></figcaption>
+          </figure>
+          <figure class="testimonial reveal" data-reveal>
+            <div class="stars">★★★★★</div>
+            <blockquote>« Les devis et les relances partent tout seuls. Je me concentre sur le terrain, plus sur la paperasse. »</blockquote>
+            <figcaption><span class="avatar">A</span><div><strong>Artisan</strong><small>Bâtiment</small></div></figcaption>
+          </figure>
+        </div>
+        <p class="testimonials__note">Témoignages illustratifs — remplacez-les par vos vrais clients dès vos premières missions.</p>
+      </div>
+    </section>
+
+    <!-- ===================== TARIFS ===================== -->
+    <section class="section section--alt" id="tarifs">
+      <div class="container">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">Tarifs</span>
+          <h2 class="section__title">Un investissement, <span class="gradient-text">pas une dépense</span></h2>
+          <p class="section__lead">On commence toujours par un audit gratuit. Vous savez exactement ce que vous payez et ce que ça vous rapporte, avant de vous engager.</p>
+        </div>
+
+        <div class="pricing">
+          <article class="plan reveal" data-reveal>
+            <h3 class="plan__name">Audit &amp; Stratégie</h3>
+            <div class="plan__price">Gratuit</div>
+            <p class="plan__desc">Le point de départ idéal pour y voir clair.</p>
+            <ul class="ticks">
+              <li>Appel découverte de 30 min</li>
+              <li>Analyse de vos tâches &amp; points de friction</li>
+              <li>Plan d'action concret &amp; chiffré</li>
+            </ul>
+            <a href="#" data-cta="calendly" class="btn btn--ghost btn--block">Réserver mon audit</a>
+          </article>
+
+          <article class="plan plan--featured reveal" data-reveal>
+            <div class="plan__badge">Recommandé</div>
+            <h3 class="plan__name">Solution sur mesure</h3>
+            <div class="plan__price">Sur devis</div>
+            <p class="plan__desc">Une automatisation clé en main, conçue pour votre métier.</p>
+            <ul class="ticks">
+              <li>1 solution complète (service client, commande, automatisation…)</li>
+              <li>Intégration à vos outils existants</li>
+              <li>Formation &amp; prise en main</li>
+              <li>30 jours de suivi inclus</li>
+            </ul>
+            <a href="#contact" class="btn btn--primary btn--block">Demander un devis</a>
+          </article>
+
+          <article class="plan reveal" data-reveal>
+            <h3 class="plan__name">Partenariat</h3>
+            <div class="plan__price">Sur mesure</div>
+            <p class="plan__desc">Pour aller plus loin et automatiser toute l'entreprise.</p>
+            <ul class="ticks">
+              <li>Plusieurs automatisations &amp; agents</li>
+              <li>Suivi &amp; optimisation mensuels</li>
+              <li>Support prioritaire</li>
+            </ul>
+            <a href="#contact" class="btn btn--ghost btn--block">En discuter</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="section" id="faq">
+      <div class="container container--narrow">
+        <div class="section__head reveal" data-reveal>
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section__title">Les questions <span class="gradient-text">fréquentes</span></h2>
+        </div>
+
+        <div class="faq">
+          <details class="faq__item reveal" data-reveal>
+            <summary>Combien ça coûte ?</summary>
+            <div class="faq__body"><p>Ça dépend de votre besoin et de la complexité. C'est pour ça que l'audit est gratuit : vous repartez avec un devis clair et un retour sur investissement estimé, sans engagement.</p></div>
+          </details>
+          <details class="faq__item reveal" data-reveal>
+            <summary>Faut-il des compétences techniques de mon côté ?</summary>
+            <div class="faq__body"><p>Aucune. Tout est clé en main. Je m'occupe de la conception, du déploiement et de la formation. Vous n'avez qu'à utiliser la solution.</p></div>
+          </details>
+          <details class="faq__item reveal" data-reveal>
+            <summary>En combien de temps c'est opérationnel ?</summary>
+            <div class="faq__body"><p>La plupart des projets sont livrés en moins de 2 semaines. Certaines automatisations simples peuvent être en place en quelques jours.</p></div>
+          </details>
+          <details class="faq__item reveal" data-reveal>
+            <summary>Est-ce que ça marche avec mes outils actuels ?</summary>
+            <div class="faq__body"><p>Oui. Les solutions s'intègrent à ce que vous utilisez déjà : site web, WhatsApp, Instagram, agenda en ligne, caisse, tableurs, CRM…</p></div>
+          </details>
+          <details class="faq__item reveal" data-reveal>
+            <summary>Mes données sont-elles en sécurité ?</summary>
+            <div class="faq__body"><p>Oui. J'utilise des outils conformes au RGPD et un hébergement maîtrisé. Vos données et celles de vos clients restent protégées.</p></div>
+          </details>
+          <details class="faq__item reveal" data-reveal>
+            <summary>Je ne suis pas un restaurant, est-ce pour moi ?</summary>
+            <div class="faq__body"><p>Absolument. Toute entreprise qui gère des clients ou des tâches répétitives peut en profiter : coiffeurs, artisans, e-commerce, immobilier, santé, services…</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT / CTA FINAL ===================== -->
+    <section class="section cta-final" id="contact">
+      <div class="container">
+        <div class="cta-card reveal" data-reveal>
+          <div class="cta-card__bg" aria-hidden="true"><div class="orb orb--3"></div></div>
+
+          <div class="cta-card__grid">
+            <div class="cta-card__left">
+              <span class="eyebrow">Parlons-en</span>
+              <h2 class="section__title">Prêt à automatiser <span class="gradient-text">votre entreprise&nbsp;?</span></h2>
+              <p class="section__lead">Réservez un appel gratuit, ou laissez-moi un message : je vous réponds rapidement avec des pistes concrètes adaptées à votre activité.</p>
+
+              <div class="cta-card__actions">
+                <a href="#" data-cta="calendly" class="btn btn--primary btn--lg">Réserver un appel gratuit</a>
+                <a href="#" data-cta="whatsapp" class="btn btn--whatsapp btn--lg">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.207zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                  WhatsApp
+                </a>
+              </div>
+
+              <ul class="cta-card__assure">
+                <li>✓ Réponse sous 24h</li>
+                <li>✓ Sans engagement</li>
+                <li>✓ Conseils gratuits dès le 1er appel</li>
+              </ul>
+            </div>
+
+            <div class="cta-card__right">
+              <form class="form" id="leadForm" novalidate>
+                <div class="form__row">
+                  <label class="field">
+                    <span>Nom / Prénom</span>
+                    <input type="text" name="name" required placeholder="Jean Dupont" autocomplete="name" />
+                  </label>
+                  <label class="field">
+                    <span>Entreprise</span>
+                    <input type="text" name="company" placeholder="Votre entreprise" autocomplete="organization" />
+                  </label>
+                </div>
+                <div class="form__row">
+                  <label class="field">
+                    <span>Email</span>
+                    <input type="email" name="email" required placeholder="vous@email.com" autocomplete="email" />
+                  </label>
+                  <label class="field">
+                    <span>Téléphone</span>
+                    <input type="tel" name="phone" placeholder="06 12 34 56 78" autocomplete="tel" />
+                  </label>
+                </div>
+                <label class="field">
+                  <span>Votre secteur</span>
+                  <select name="sector">
+                    <option value="">Sélectionnez…</option>
+                    <option>Restaurant / Food</option>
+                    <option>Coiffeur / Institut</option>
+                    <option>Artisan / BTP</option>
+                    <option>E-commerce</option>
+                    <option>Immobilier</option>
+                    <option>Santé / Bien-être</option>
+                    <option>Autre</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Votre besoin</span>
+                  <textarea name="message" rows="4" required placeholder="Décrivez en quelques mots ce que vous aimeriez automatiser…"></textarea>
+                </label>
+                <button type="submit" class="btn btn--primary btn--block btn--lg" id="leadSubmit">Envoyer ma demande</button>
+                <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#top" class="brand">
+          <span class="brand__mark">◆</span>
+          <span class="brand__name">Nexa<span class="brand__accent">IA</span></span>
+        </a>
+        <p>Automatisations IA sur mesure pour les commerces et les PME. Gagnez du temps, servez vos clients 24/7 et développez votre activité.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Navigation</h4>
+        <a href="#services">Services</a>
+        <a href="#secteurs">Secteurs</a>
+        <a href="#methode">Méthode</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer__col">
+        <h4>En savoir plus</h4>
+        <a href="#realisations">Cas d'usage</a>
+        <a href="#temoignages">Témoignages</a>
+        <a href="#" data-cta="calendly">Réserver un appel</a>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <a href="#" data-cta="email" data-email="romano234y@outlook.fr">Email</a>
+        <a href="#" data-cta="whatsapp">WhatsApp</a>
+        <a href="#" data-cta="calendly">Réserver un appel</a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© <span id="year">2026</span> Nexa IA — Tous droits réservés.</span>
+      <span class="footer__made">Conçu &amp; développé par Romain</span>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="#" data-cta="whatsapp" class="fab" aria-label="Contacter sur WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.207zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+
+  <script src="main.js"></script>
+</body>
+</html>

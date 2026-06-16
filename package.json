@@ -1,7 +1,7 @@
 {
-  "name": "rpizz",
+  "name": "nexa-ia",
   "version": "1.0.0",
-  "description": "Site de commande R'pizz",
+  "description": "Site vitrine Nexa IA — agence d'automatisation IA (service client, prise de commande, automatisations sur mesure)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Nexa IA — Demandes reçues</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{ --accent:#10b981; --accent-2:#34d399; --bg:#04070a; --surface:rgba(255,255,255,.04); --border:rgba(255,255,255,.1); --text:#eaf2ee; --muted:#9bb0a7; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding:32px 20px}
+    .wrap{max-width:1080px;margin:0 auto}
+    h1{font-family:'Sora',sans-serif;font-size:1.6rem;display:flex;align-items:center;gap:10px}
+    .mark{color:var(--accent-2)}
+    .sub{color:var(--muted);margin:6px 0 26px;font-size:.95rem}
+    .bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-left:auto}
+    .pill{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-size:.85rem;font-family:'Sora',sans-serif;font-weight:600}
+    .pill b{color:var(--accent-2)}
+    button{font-family:'Sora',sans-serif;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:8px;padding:8px 14px;font-size:.85rem;font-weight:600;transition:.2s}
+    button:hover{border-color:var(--accent)}
+    .leads{display:flex;flex-direction:column;gap:14px}
+    .lead{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 22px}
+    .lead__top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+    .lead__name{font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem}
+    .lead__meta{color:var(--muted);font-size:.85rem;margin-top:2px}
+    .lead__meta a{color:var(--accent-2);text-decoration:none}
+    .lead__date{color:var(--muted);font-size:.8rem;white-space:nowrap}
+    .lead__msg{margin:14px 0;padding:14px 16px;background:rgba(255,255,255,.03);border-left:3px solid var(--accent);border-radius:8px;font-size:.95rem;white-space:pre-wrap}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .tag{font-size:.75rem;font-weight:600;font-family:'Sora',sans-serif;padding:4px 10px;border-radius:999px;background:rgba(52,211,153,.14);color:var(--accent-2)}
+    .status{display:flex;gap:6px;flex-wrap:wrap}
+    .status button{padding:5px 11px;font-size:.78rem;opacity:.6}
+    .status button.on{opacity:1;border-color:var(--accent);background:rgba(16,185,129,.16)}
+    .empty{text-align:center;color:var(--muted);padding:60px 20px;border:1px dashed var(--border);border-radius:14px}
+    .err{color:#f87171;text-align:center;padding:20px}
+    a.back{color:var(--muted);text-decoration:none;font-size:.9rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1><span class="mark">◆</span> Nexa IA — Demandes reçues</h1>
+    <p class="sub">Les messages envoyés depuis le formulaire de contact de votre site. <a class="back" href="/">← Retour au site</a></p>
+
+    <div class="bar">
+      <button id="refresh">↻ Actualiser</button>
+      <div class="stats" id="stats"></div>
+    </div>
+
+    <div id="content" class="leads"><p class="sub">Chargement…</p></div>
+  </div>
+
+  <script>
+    const KEY = new URLSearchParams(location.search).get('key');
+    const api = (p) => p + (KEY ? (p.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(KEY) : '');
+    const STATUSES = [['nouveau','Nouveau'],['contacte','Contacté'],['gagne','Gagné'],['perdu','Perdu']];
+    const fmtDate = (s) => new Date(s).toLocaleString('fr-FR',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+    const esc = (s) => (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+    async function setStatus(id, status){
+      try{
+        await fetch(api('/api/leads/'+id),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});
+        load();
+      }catch(e){ alert('Erreur lors de la mise à jour'); }
+    }
+
+    async function load(){
+      const content = document.getElementById('content');
+      try{
+        const res = await fetch(api('/api/leads'));
+        if(res.status===401){ content.innerHTML='<p class="err">Accès protégé. Ajoutez ?key=VOTRE_CLE dans l\'URL.</p>'; return; }
+        if(!res.ok) throw new Error('HTTP '+res.status);
+        const leads = await res.json();
+
+        const counts = {nouveau:0,contacte:0,gagne:0,perdu:0};
+        leads.forEach(l=>counts[l.status]=(counts[l.status]||0)+1);
+        document.getElementById('stats').innerHTML =
+          '<span class="pill">Total <b>'+leads.length+'</b></span>'+
+          STATUSES.map(([k,lbl])=>'<span class="pill">'+lbl+' <b>'+(counts[k]||0)+'</b></span>').join('');
+
+        if(!leads.length){ content.innerHTML='<div class="empty">Aucune demande pour l\'instant. Elles apparaîtront ici dès qu\'un visiteur remplit le formulaire.</div>'; return; }
+
+        content.innerHTML = leads.map(l=>{
+          const tel = l.phone ? '<a href="tel:'+esc(l.phone)+'">'+esc(l.phone)+'</a>' : '';
+          const sep = (l.company && (l.sector||tel)) ? ' · ' : '';
+          return '<div class="lead">'+
+            '<div class="lead__top"><div>'+
+              '<div class="lead__name">'+esc(l.name)+'</div>'+
+              '<div class="lead__meta"><a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a>'+(tel?' · '+tel:'')+'</div>'+
+              '<div class="lead__meta">'+(l.company?esc(l.company):'')+sep+(l.sector?('<span class="tag">'+esc(l.sector)+'</span>'):'')+'</div>'+
+            '</div><div class="lead__date">'+fmtDate(l.created_at)+'</div></div>'+
+            '<div class="lead__msg">'+esc(l.message)+'</div>'+
+            '<div class="status">'+STATUSES.map(([k,lbl])=>'<button class="'+(l.status===k?'on':'')+'" onclick="setStatus('+l.id+',\''+k+'\')">'+lbl+'</button>').join('')+'</div>'+
+          '</div>';
+        }).join('');
+      }catch(e){ content.innerHTML='<p class="err">Erreur de chargement : '+e.message+'</p>'; }
+    }
+
+    document.getElementById('refresh').addEventListener('click', load);
+    load();
+  </script>
+</body>
+</html>

@@ -2,3 +2,6 @@ node_modules/
 orders.db
 *.db-journal
 .env
+
+# Données clients (demandes reçues via le formulaire) — ne pas versionner
+leads.json
